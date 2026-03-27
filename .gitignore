@@ -1,4 +1,46 @@
+# Vera Project - Comprehensive .gitignore
+
+# Xcode
+#
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.playground.xml
+xcuserdata/
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid committing external dependencies.
+# .build/
+
+# Bundle (Ruby)
+#
+.bundle/
+vendor/bundle/
+Gemfile.lock
+
+# User-specific Xcode settings
+#
+*.xcuserstate
+
+# Project Secrets & Environment Variables
+#
 Config.xcconfig
 configure_env.rb
 
+# OS Specific
+#
 .DS_Store
+Thumbs.db
+
+# Misc
+#
+*.swp
+*.lock
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
