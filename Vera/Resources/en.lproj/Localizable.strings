@@ -1,0 +1,177 @@
+/* 
+  Localizable.strings
+  Vera
+*/
+
+// MARK: - Prayer Times
+"prayer_imsak" = "Imsak";
+"prayer_sunrise" = "Sunrise";
+"prayer_dhuhr" = "Dhuhr";
+"prayer_asr" = "Asr";
+"prayer_maghrib" = "Maghrib";
+"prayer_isha" = "Isha";
+
+// MARK: - Home Screen
+"home_vakitler" = "Prayer Times";
+"home_vakitler_aylik" = "Monthly Schedule";
+"home_vakitler_aylik_alt" = "30-Day Prayer Schedule";
+"home_sponsorlu" = "Sponsored Content";
+"home_yukleniyor" = "Loading Times...";
+"home_hata_tekrar_dene" = "Retry";
+"home_konum_sec" = "Select Location";
+"home_konum_bekle" = "Please select a location or wait.";
+
+// MARK: - Hero Card
+"hero_vakit_kalan" = "TIME REMAINING TO %@";
+"hero_vakit_girdi" = "%@ HAS STARTED";
+"hero_su_anki_vakit" = "Current Prayer:";
+
+// MARK: - Common UI
+"common_tamam" = "OK";
+"common_iptal" = "Cancel";
+"common_kapat" = "Close";
+"common_sifirla" = "Reset";
+"common_kaydet" = "Save";
+"common_ileri" = "Next";
+"common_geri" = "Back";
+"common_bitti" = "Finish";
+
+// MARK: - Location
+"location_secilen" = "Selected Location:";
+"location_otomatik_bul" = "Find Automatically";
+"location_manuel_sec" = "Select Manually";
+"location_farkli_sec" = "Change Location";
+"location_araniyor" = "Searching GPS and matching API...";
+
+// MARK: - Onboarding
+"onboarding_basla" = "Get Started";
+"onboarding_devam" = "Continue";
+"onboarding_harika" = "Great, Continue";
+"onboarding_anladim" = "I Understand";
+"onboarding_gec" = "Skip for Now";
+"onboarding_izin_ver" = "Allow";
+"onboarding_s1_title" = "Set Your Location";
+"onboarding_s1_desc" = "To calculate times perfectly, we need to know your location.";
+
+// STEP 2
+"onboarding_s2_title" = "Don't Miss Prayer Times";
+"onboarding_s2_desc" = "You can track the remaining time to the next prayer second by second on the main screen.";
+"onboarding_s2_loading" = "Calculating Live Times...";
+
+// STEP 3
+"onboarding_s3_title" = "Notification Permission";
+"onboarding_s3_desc" = "We need notification permission to play the adhan and provide reminders.";
+
+// STEP 4
+"onboarding_s4_title" = "When Should Adhan Be Played?";
+
+// STEP 5
+"onboarding_s5_title" = "Early Reminders";
+"onboarding_s5_desc" = "How many minutes before the adhan should we send you a silent notification?";
+"onboarding_s5_toggle" = "Enable Reminders";
+"onboarding_s5_duration" = "Duration (Minutes)";
+"onboarding_s5_min" = "%d Min";
+
+// STEP 6
+"onboarding_s6_title" = "Important iOS Restrictions";
+"onboarding_s6_warning1" = "If your device is on **Silent** or **Do Not Disturb (DND)** mode, iOS won't play the adhan sound; it will only vibrate.";
+"onboarding_s6_warning2" = "Due to iOS rules, local notification sounds can play for a maximum of **30 seconds**.";
+
+// STEP 7
+"onboarding_s7_title" = "All Set!";
+"onboarding_s7_desc" = "You can now start tracking prayer times with Vera.";
+
+// MARK: - Settings
+"settings_title" = "Settings";
+"settings_subtitle" = "Manage your preferences";
+
+"settings_genel" = "General";
+"settings_oto_konum" = "Auto Location";
+"settings_bildirimler" = "Notifications";
+
+"settings_gorunum_dil" = "Appearance and Language";
+"settings_tema" = "Theme";
+"settings_tema_sistem" = "System";
+"settings_tema_acik" = "Light";
+"settings_tema_koyu" = "Dark";
+"settings_dil" = "Language";
+"settings_dil_tr" = "Turkish";
+
+"settings_kuran" = "Holy Quran";
+"settings_meal_yazar" = "Select Translation";
+
+"settings_destek" = "Support";
+"settings_ulasin" = "Contact Us";
+"settings_yardim" = "Help & FAQ";
+"settings_hakkimizda" = "About Us";
+
+// MARK: - Zakat Calculator
+"zakat_title" = "Calculate Zakat";
+"zakat_birikim_fiyatlari" = "SAVINGS PRICES";
+"zakat_altin_gr" = "Gold/Gr";
+"zakat_gumus_gr" = "Silver/Gr";
+
+"zakat_nakit_banka" = "Cash and Bank";
+"zakat_nakit_para" = "Cash";
+"zakat_banka_hesaplari" = "Bank Accounts";
+"zakat_doviz" = "Foreign Currency";
+
+"zakat_ziynet" = "Jewelry and Precious Metals";
+"zakat_altin_24k" = "24K Gold (Grams)";
+"zakat_altin_22k" = "22K Gold (Grams)";
+"zakat_gumus_gr_input" = "Silver (Grams)";
+
+"zakat_ticaret" = "Trade and Receivables";
+"zakat_ticari" = "Commercial Goods";
+"zakat_alacaklar" = "Receivables";
+
+"zakat_borclar" = "Debts to Deduct";
+"zakat_borclar_odenecek" = "Payable Debts";
+
+"zakat_tarim" = "Agriculture (Ushr)";
+"zakat_mahsul" = "Product Value";
+"zakat_sulama_masrafli" = "Costly Irrigation";
+"zakat_oran_5" = "Zakat Rate: %5 (1/20)";
+"zakat_oran_10" = "Natural Irrigation (Rate: %10)";
+
+"zakat_net_varlik" = "NET ASSETS";
+"zakat_nisap_baraji" = "NISAB THRESHOLD";
+"zakat_toplam_miktar" = "TOTAL ZAKAT";
+"zakat_hesap_gerekmiyor" = "Zakat is not required as your assets are below the nisab threshold.";
+
+// MARK: - Zakat Info
+"zakat_info_title" = "Zakat Guide";
+"zakat_info_nasil_hesaplanir" = "How to Calculate Zakat?";
+"zakat_info_nasil_hesaplanir_desc" = "Zakat is calculated by deducting your debts from your total zakatable assets. If it exceeds the nisab threshold, 2.5% zakat is calculated.";
+
+// MARK: - Tabs
+"tab_ana_sayfa" = "Home";
+"tab_kuran" = "Quran";
+"tab_kible" = "Qibla";
+"tab_dini_gunler" = "Religious Days";
+"tab_menu" = "Menu";
+
+// MARK: - Nearby Mosques
+"mosques_title" = "Nearby Mosques";
+"mosques_searching" = "Searching for mosques...";
+"mosques_not_found" = "No mosques found nearby.";
+"mosques_get_directions" = "Get Directions (Apple Maps)";
+"mosques_unknown" = "Unknown Mosque";
+
+// MARK: - Quran
+"quran_title" = "Holy Quran";
+"quran_surahs" = "Surahs";
+"quran_loading" = "Loading Database...";
+"quran_verse" = "Verse";
+"quran_page" = "Page";
+
+// MARK: - Dhikr
+"dhikr_title" = "Dhikr Counter";
+"dhikr_reset_title" = "Reset Counter";
+"dhikr_reset_message" = "Are you sure you want to reset the counter?";
+"dhikr_target" = "TARGET: %d";
+"dhikr_no_target" = "NO TARGET";
+"dhikr_set_target" = "Set Target";
+"dhikr_new_target" = "New Target";
+"dhikr_target_desc" = "Set a target for your dhikr (e.g., 33, 99). Enter 0 to remove.";
+"dhikr_select_tesbihat" = "Select Tesbihat";

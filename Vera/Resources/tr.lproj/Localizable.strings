@@ -1,0 +1,196 @@
+/* 
+  Localizable.strings
+  Vera
+*/
+
+// MARK: - Prayer Times
+"prayer_imsak" = "İmsak";
+"prayer_sunrise" = "Güneş";
+"prayer_dhuhr" = "Öğle";
+"prayer_asr" = "İkindi";
+"prayer_maghrib" = "Akşam";
+"prayer_isha" = "Yatsı";
+
+// MARK: - Home Screen
+"home_vakitler" = "Vakitler";
+"home_vakitler_aylik" = "Aylık İmsakiye";
+"home_vakitler_aylik_alt" = "30 Günlük Vakit Çizelgesi";
+"home_sponsorlu" = "Sponsorlu İçerik";
+"home_yukleniyor" = "Vakitler Yükleniyor...";
+"home_hata_tekrar_dene" = "Tekrar Dene";
+"home_konum_sec" = "Konum Seçin";
+"home_konum_bekle" = "Lütfen bir konum seçin veya bekleyin.";
+
+// MARK: - Hero Card
+"hero_vakit_kalan" = "%@ VAKTİNE KALAN SÜRE";
+"hero_vakit_girdi" = "%@ VAKTİ GİRDİ";
+"hero_su_anki_vakit" = "İçinde Bulunulan Vakit:";
+
+// MARK: - Common UI
+"common_tamam" = "Tamam";
+"common_iptal" = "İptal";
+"common_kapat" = "Kapat";
+"common_sifirla" = "Sıfırla";
+"common_kaydet" = "Kaydet";
+"common_ileri" = "İleri";
+"common_geri" = "Geri";
+"common_bitti" = "Bitti";
+
+// MARK: - Location
+"location_secilen" = "Seçilen Konum:";
+"location_otomatik_bul" = "Otomatik Konum Bul";
+"location_manuel_sec" = "Listeden Manuel Seç";
+"location_farkli_sec" = "Farklı Konum Seç";
+"location_araniyor" = "GPS Arıyor ve API ile Eşleştiriyor...";
+
+// MARK: - Onboarding
+"onboarding_basla" = "Uygulamaya Başla";
+"onboarding_devam" = "Devam Et";
+"onboarding_harika" = "Harika, Devam Et";
+"onboarding_anladim" = "Anladım";
+"onboarding_gec" = "Şimdilik Geç";
+"onboarding_izin_ver" = "İzin Ver";
+"onboarding_s1_title" = "Konumunuzu Belirleyin";
+"onboarding_s1_desc" = "Vakitleri kusursuz hesaplayabilmemiz için bize bulunduğunuz konumu söylemelisiniz.";
+
+// STEP 2
+"onboarding_s2_title" = "Vakitleri Kaçırmayın";
+"onboarding_s2_desc" = "Uygulamanın ana ekranında sıradaki namaza ne kadar kaldığını saniyesi saniyesine takip edebileceksiniz.";
+"onboarding_s2_loading" = "Canlı Vakitler Hesaplanıyor...";
+
+// STEP 3
+"onboarding_s3_title" = "Bildirim İzni";
+"onboarding_s3_desc" = "Ezan vakitlerinde alarm çaldırabilmemiz ve size hatırlatmalar yapabilmemiz için bildirim izni vermeniz gerekiyor.";
+
+// STEP 4
+"onboarding_s4_title" = "Hangi Vakitlerde Ezan Okunsun?";
+
+// STEP 5
+"onboarding_s5_title" = "Önceden Hatırlatıcılar";
+"onboarding_s5_desc" = "Ezan vaktinden ne kadar önce hazırlık yapmanız için sessiz bildirim gönderelim?";
+"onboarding_s5_toggle" = "Hatırlatıcıları Aç";
+"onboarding_s5_duration" = "Süre (Dakika)";
+"onboarding_s5_min" = "%d Dk";
+
+// STEP 6
+"onboarding_s6_title" = "Önemli iOS Kısıtlamaları";
+"onboarding_s6_warning1" = "Cihazınız **Sessizde** veya **Rahatsız Etme (DND)** modundaysa iOS, ezan sesini oynatmaz; sadece titrer.";
+"onboarding_s6_warning2" = "iOS kuralları gereğince yerel bildirim sesleri en fazla **30 saniye** çalabilir ve ardından zorla susturulur.";
+
+// STEP 7
+"onboarding_s7_title" = "Her Şey Hazır!";
+"onboarding_s7_desc" = "Vera ile vakitleri takip etmeye başlayabilirsiniz.";
+
+// MARK: - Settings
+"settings_title" = "Ayarlar";
+"settings_subtitle" = "Tercihlerini yönet";
+
+"settings_genel" = "Genel";
+"settings_oto_konum" = "Otomatik Konum";
+"settings_bildirimler" = "Bildirimler";
+
+"settings_gorunum_dil" = "Görünüm ve Dil";
+"settings_tema" = "Tema";
+"settings_tema_sistem" = "Sistem";
+"settings_tema_acik" = "Açık";
+"settings_tema_koyu" = "Koyu";
+"settings_dil" = "Dil";
+"settings_dil_tr" = "Türkçe";
+
+"settings_kuran" = "Kuran-ı Kerim";
+"settings_meal_yazar" = "Meal Yazar Seçimi";
+
+"settings_destek" = "Destek";
+"settings_ulasin" = "Bize Ulaşın";
+"settings_yardim" = "Yardım ve SSS";
+"settings_hakkimizda" = "Hakkımızda";
+
+// MARK: - Zakat Calculator
+"zakat_title" = "Zekat Hesapla";
+"zakat_birikim_fiyatlari" = "BİRİKİM FİYATLARI";
+"zakat_altin_gr" = "Altın/Gr (₺)";
+"zakat_gumus_gr" = "Gümüş/Gr (₺)";
+
+"zakat_nakit_banka" = "Nakit ve Banka";
+"zakat_nakit_para" = "Nakit Para (TL)";
+"zakat_banka_hesaplari" = "Banka Hesapları";
+"zakat_doviz" = "Döviz (TL Karşılığı)";
+
+"zakat_ziynet" = "Ziynet ve Değerli Maden";
+"zakat_altin_24k" = "24 Ayar Altın (Gram)";
+"zakat_altin_22k" = "22 Ayar Altın (Gram)";
+"zakat_gumus_gr_input" = "Gümüş (Gram)";
+
+"zakat_ticaret" = "Ticaret ve Alacaklar";
+"zakat_ticari" = "Ticari Mallar (TL)";
+"zakat_alacaklar" = "Kesin Alacaklar (TL)";
+
+"zakat_borclar" = "Düşülecek Borçlar";
+"zakat_borclar_odenecek" = "Ödenecek Borçlar (TL)";
+
+"zakat_tarim" = "Tarım (Öşür)";
+"zakat_mahsul" = "Mahsul Değeri (TL)";
+"zakat_sulama_masrafli" = "Masraflı Sulama";
+"zakat_oran_5" = "Zekat Oranı: %%5 (1/20)";
+"zakat_oran_10" = "Doğal Sulama (Zekat Oranı: %%10)";
+
+"zakat_net_varlik" = "NET VARLIK";
+"zakat_nisap_baraji" = "NİSAP BARAJI";
+"zakat_toplam_miktar" = "TOPLAM VERİLECEK ZEKAT";
+"zakat_hesap_gerekmiyor" = "Varlıklarınız nisap miktarının altında olduğu için zekat farz değildir.";
+
+// MARK: - Zakat Info
+"zakat_info_title" = "Zekat Rehberi";
+"zakat_info_nasil_hesaplanir" = "Zekat Nasıl Hesaplanır?";
+"zakat_info_nasil_hesaplanir_desc" = "Zekat hesaplaması, sahip olduğunuz zekata tabi varlıkların toplamından borçlarınızın düşülmesiyle yapılır. Nisap tutarını aşan net varlık üzerinden %%2,5 oranında zekat hesaplanır.";
+
+"zakat_info_zinet" = "Zinet Eşyaları (Altın/Gümüş)";
+"zakat_info_zinet_desc" = "22 ayar, 24 ayar altın veya gümüş takılarınızın toplam ağırlığını belirterek hesaplamaya dahil etmelisiniz.";
+
+"zakat_info_zirai" = "Zirai Mahsuller (Öşür)";
+"zakat_info_zirai_desc" = "Hasat ettiğiniz ürün miktarını ve sulama yönteminizi seçerek, Din İşleri Yüksek Kurulu’nun güncel fetvalarına uygun şekilde öşür (tarım zekatı) miktarınızı hesaplayabilirsiniz. Masraflı sulamada oran %%5, doğal masrafsız sulamada oran %%10'dur.";
+
+"zakat_info_nisap" = "Nisap Miktarı ve 1 Yıl Şartı";
+"zakat_info_nisap_desc" = "Zekâtın farz olması için kişinin Müslüman, akıl baliğ; yıllık borcu ve temel ihtiyaçlarından fazla “nisap miktarı” mala/paraya sahip olması gerekir. Ayrıca söz konusu malın üzerinden bir kamerî yılın (354 gün) geçmesi ve bu birikimin yıl sonunda nisap miktarının altına düşmemesi gerekir.";
+
+"zakat_info_maas" = "Maaş ve Ücret Gelirlerinin Zekâtı";
+// MARK: - Tabs
+"tab_ana_sayfa" = "Ana Sayfa";
+"tab_kuran" = "Kuran";
+"tab_kible" = "Kıble";
+"tab_dini_gunler" = "Dini Günler";
+"tab_menu" = "Menü";
+ 
+// MARK: - Nearby Mosques
+"mosques_title" = "Yakın Camiler";
+"mosques_searching" = "Camiler Aranıyor...";
+"mosques_not_found" = "Çevrenizde cami bulunamadı.";
+"mosques_get_directions" = "Yol Tarifi Al (Apple Maps)";
+"mosques_unknown" = "Bilinmeyen Cami";
+"imsakiye_tarih" = "Tarih";
+
+// MARK: - Quran
+"quran_title" = "Kuran-ı Kerim";
+"quran_surahs" = "Sureler";
+"quran_loading" = "Veritabanı Yükleniyor...";
+"quran_verse" = "Ayet";
+"quran_page" = "Sayfa";
+
+// MARK: - Dhikr
+"dhikr_title" = "Zikirmatik";
+"dhikr_reset_title" = "Sayacı Sıfırla";
+"dhikr_reset_message" = "Zikir sayacını sıfırlamak istediğinize emin misiniz?";
+"dhikr_target" = "HEDEF: %d";
+"dhikr_no_target" = "HEDEF YOK";
+"dhikr_set_target" = "Hedef Belirle";
+"dhikr_new_target" = "Yeni Hedef";
+"dhikr_target_desc" = "Zikiriniz için bir hedef sayısı belirleyin (Örn: 33, 99). Hedefi kaldırmak için 0 yazabilirsiniz.";
+"dhikr_select_tesbihat" = "Tesbihat Seçiniz";
+
+"dhikr_subhanallah" = "Sübhanallah";
+"dhikr_elhamdulillah" = "Elhamdülillah";
+"dhikr_allahuekber" = "Allahü Ekber";
+"dhikr_tevhidi" = "Kelime-i Tevhid";
+"dhikr_salavat" = "Salavat-ı Şerife";
+"dhikr_estagfirullah" = "Estağfirullah";
+"dhikr_free" = "Serbest Zikir";

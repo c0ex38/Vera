@@ -1,0 +1,81 @@
+import SwiftUI
+
+struct DiscoveryCard: View {
+    let suggestion: HomeSuggestion
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Günün Keşfi")
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .foregroundColor(.themeText)
+                .padding(.horizontal, 20)
+            
+            ZStack {
+                // Glassmorphic Card
+                RoundedRectangle(cornerRadius: 32, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 32, style: .continuous)
+                            .stroke(LinearGradient(colors: [suggestion.color.opacity(0.4), .clear], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
+                    )
+                
+                VStack(alignment: .leading, spacing: 18) {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle()
+                                .fill(suggestion.color.opacity(0.15))
+                                .frame(width: 48, height: 48)
+                            
+                            Image(systemName: suggestion.icon)
+                                .font(.system(size: 22))
+                                .foregroundColor(suggestion.color)
+                        }
+                        
+                        Text(suggestion.title)
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                            .foregroundColor(.themeTextSecondary)
+                            .kerning(1.2)
+                        
+                        Spacer()
+                    }
+                    
+                    Text(suggestion.content)
+                        .font(.system(size: 17, weight: .medium, design: .serif))
+                        .foregroundColor(.themeText)
+                        .lineSpacing(6)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    NavigationLink(destination: destinationFor(suggestion.type)) {
+                        HStack {
+                            Text(suggestion.actionTitle)
+                                .font(.system(size: 15, weight: .bold, design: .rounded))
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 12, weight: .bold))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
+                        .background(
+                            Capsule()
+                                .fill(suggestion.color)
+                                .shadow(color: suggestion.color.opacity(0.3), radius: 10, y: 5)
+                        )
+                    }
+                }
+                .padding(28)
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+    
+    @ViewBuilder
+    private func destinationFor(_ type: HomeSuggestion.SuggestionType) -> some View {
+        switch type {
+        case .quran: QuranIndexView()
+        case .dhikr: DhikrView()
+        case .esma: EsmaulHusnaListView()
+        case .mosques: NearbyMosquesView()
+        case .zakat: ZakatHomeView()
+        }
+    }
+}
