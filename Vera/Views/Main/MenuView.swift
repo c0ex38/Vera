@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MenuView: some View {
+struct MenuView: View {
     @State private var navigateToModule = false
     @State private var selectedModule: MenuModule?
     
@@ -133,25 +133,25 @@ struct MenuView: some View {
         case .zikir:
             DhikrView()
         case .imsakiye:
-            ImsakiyeView()
+            MonthlyImsakiyeView()
         case .alarms:
             NotificationSettingsView()
         case .surahs:
-             PrayerSurahListView()
+             PrayerSurahsListView()
         case .esma:
-            EsmaulHusnaView()
+            EsmaulHusnaListView()
         case .quran:
             QuranIndexView()
         case .mosques:
             NearbyMosquesView()
         case .zakat:
-            ZakatCalculatorView()
+            ZakatHomeView()
         case .library:
-            LibraryView()
+            LibraryListView()
         case .hadiths:
             HadithListView()
         case .sermon:
-            SermonView()
+            SermonListView()
         case .settings:
             SettingsView()
         }
