@@ -19,7 +19,11 @@
 "home_yukleniyor" = "Loading Times...";
 "home_hata_tekrar_dene" = "Retry";
 "home_konum_sec" = "Select Location";
-"home_konum_bekle" = "Please select a location or wait.";
+"home_konum_bekle" = "Waiting for location...";
+"home_gunun_hadisi" = "Hadith of the Day";
+"home_gunun_icerikleri" = "Daily Content";
+"home_hizli_erisim" = "Quick Access";
+"home_kesfet_ogren" = "Discover & Learn";
 
 // MARK: - Hero Card
 "hero_vakit_kalan" = "TIME REMAINING TO %@";
@@ -175,4 +179,83 @@
 "dhikr_set_target" = "Set Target";
 "dhikr_new_target" = "New Target";
 "dhikr_target_desc" = "Set a target for your dhikr (e.g., 33, 99). Enter 0 to remove.";
-"dhikr_select_tesbihat" = "Select Tesbihat";
+"dhikr_estagfirullah" = "Istighfar";
+"dhikr_free" = "Free Dhikr";
+
+// MARK: - Menu
+"menu_title" = "Explore";
+"menu_subtitle" = "All tools and features";
+"menu_zikir" = "Dhikr";
+"menu_zikir_sub" = "Tasbih";
+"menu_imsakiye" = "Imsakiye";
+"menu_imsakiye_sub" = "30-Day";
+"menu_alarmlar" = "Alarms";
+"menu_alarmlar_sub" = "Adhan/Alert";
+"menu_sureler" = "Surahs";
+"menu_sureler_sub" = "Quran";
+"menu_esma" = "99 Names";
+"menu_esma_sub" = "Esmaul Husna";
+"menu_kuran" = "Quran";
+"menu_kuran_sub" = "Juz/Verse";
+"menu_camiler" = "Mosques";
+"menu_camiler_sub" = "Map";
+"menu_zekat" = "Zakat";
+"menu_zekat_sub" = "Calculate";
+"menu_library" = "Library";
+"menu_library_sub" = "Religious Info";
+"menu_hadiths" = "Hadiths";
+"menu_hadiths_sub" = "999 Hadiths";
+"menu_sermon" = "Sermon";
+"menu_sermon_sub" = "Weekly";
+"menu_settings" = "Settings";
+"menu_settings_sub" = "Preferences";
+"menu_loading_imsakiye" = "Loading Imsakiye...";
+
+// MARK: - Hadith
+"hadith_title" = "The Noble Hadiths";
+"hadith_search_placeholder" = "Search Hadiths...";
+
+// MARK: - Qibla
+"qibla_title" = "Qibla";
+"qibla_facing" = "YOU ARE FACING QIBLA";
+"qibla_not_facing" = "TURN TOWARDS QIBLA";
+"qibla_north" = "N";
+"qibla_east" = "E";
+"qibla_south" = "S";
+"qibla_west" = "W";
+
+// MARK: - Esmaul Husna
+"esma_title" = "Esmaul Husna";
+"esma_subtitle" = "99 Names of Allah";
+
+// MARK: - Units
+"common_km" = "KM";
+
+// MARK: - Suggestions
+"sug_dhikr_title" = "Dhikr of the Day";
+"sug_dhikr_content" = "Subhanallahi wa bi-hamdihi (Glory be to Allah and His is the praise)";
+"sug_dhikr_action" = "Open Dhikr Counter";
+
+"sug_quran_title" = "Verse of the Day";
+"sug_quran_content" = "Surely with hardship comes ease. (Ash-Sharh, 5)";
+"sug_quran_action" = "Read Holy Quran";
+
+"sug_esma_title" = "Esmaul Husna";
+"sug_esma_content" = "Ar-Rahman: The Most Merciful, who shows mercy to all creatures in the world.";
+"sug_esma_action" = "Examine 99 Names";
+
+"sug_hadith_title" = "Hadith of the Day";
+"sug_hadith_content" = "He who deceives us is not one of us. (Muslim, Iman, 164)";
+"sug_hadith_action" = "Discover Hadiths";
+
+"sug_dua_title" = "Dua of the Day";
+"sug_dua_content" = "My Lord, increase me in knowledge. (Ta-Ha, 114)";
+"sug_dua_action" = "Read Duas";
+
+"sug_mosques_title" = "Find Mosque";
+"sug_mosques_content" = "Quickly find mosques and masjids around you on the map.";
+"sug_mosques_action" = "Open Map";
+
+"sug_zakat_title" = "Zat Calculator";
+"sug_zakat_content" = "Calculate the zakat amount of your assets in accordance with Diyanet fatwas.";
+"sug_zakat_action" = "Start Calculation";

@@ -17,59 +17,59 @@ struct HomeSuggestion: Identifiable {
         let suggestions: [HomeSuggestion] = [
             HomeSuggestion(
                 type: .dhikr,
-                title: "Günün Zikri",
-                content: "Sübhânallâhi ve bi-hamdihî (Allah'ı hamd ile tesbih ederim)",
+                title: L10n.Suggestions.Dhikr.title,
+                content: L10n.Suggestions.Dhikr.content,
                 icon: "hand.tap.fill",
                 color: .orange,
-                actionTitle: "Zikirmatik'i Aç"
+                actionTitle: L10n.Suggestions.Dhikr.action
             ),
             HomeSuggestion(
                 type: .quran,
-                title: "Günün Ayeti",
-                content: "Şüphesiz güçlükle beraber bir kolaylık vardır. (İnşirah, 5)",
+                title: L10n.Suggestions.Quran.title,
+                content: L10n.Suggestions.Quran.content,
                 icon: "book.fill",
                 color: .themePrimary,
-                actionTitle: "Kuran-ı Kerim Oku"
+                actionTitle: L10n.Suggestions.Quran.action
             ),
             HomeSuggestion(
                 type: .esma,
-                title: "Esmaül Hüsna",
-                content: "Er-Rahmân: Dünyada bütün mahlukata şefkat gösteren, mü'min kafir ayırt etmeden herkesi rızıklandıran.",
+                title: L10n.Suggestions.Esma.title,
+                content: L10n.Suggestions.Esma.content,
                 icon: "sparkles",
                 color: .purple,
-                actionTitle: "99 İsim'i İncele"
+                actionTitle: L10n.Suggestions.Esma.action
             ),
             HomeSuggestion(
                 type: .hadith,
-                title: "Günün Hadisi",
-                content: "Bizi aldatan bizden değildir. (Müslim, Îmân, 164)",
+                title: L10n.Suggestions.Hadith.title,
+                content: L10n.Suggestions.Hadith.content,
                 icon: "quote.bubble.fill",
                 color: .cyan,
-                actionTitle: "Hadisleri Keşfet"
+                actionTitle: L10n.Suggestions.Hadith.action
             ),
             HomeSuggestion(
                 type: .dua,
-                title: "Günün Duası",
-                content: "Rabbim! ilmimi artır. (Tâhâ, 114)",
+                title: L10n.Suggestions.Dua.title,
+                content: L10n.Suggestions.Dua.content,
                 icon: "hands.sparkles.fill",
                 color: .indigo,
-                actionTitle: "Duaları Oku"
+                actionTitle: L10n.Suggestions.Dua.action
             ),
             HomeSuggestion(
                 type: .mosques,
-                title: "Cami Bul",
-                content: "Çevrenizdeki camileri ve mescitleri harita üzerinden hızlıca bulun.",
+                title: L10n.Suggestions.Mosques.title,
+                content: L10n.Suggestions.Mosques.content,
                 icon: "mappin.and.ellipse",
                 color: .green,
-                actionTitle: "Haritayı Aç"
+                actionTitle: L10n.Suggestions.Mosques.action
             ),
             HomeSuggestion(
                 type: .zakat,
-                title: "Zekat Hesabı",
-                content: "Varlıklarınızın zekat miktarını Diyanet fetvalarına uygun şekilde hesaplayın.",
+                title: L10n.Suggestions.Zakat.title,
+                content: L10n.Suggestions.Zakat.content,
                 icon: "banknote.fill",
                 color: .yellow,
-                actionTitle: "Hesaplamaya Başla"
+                actionTitle: L10n.Suggestions.Zakat.action
             )
         ]
         return suggestions.randomElement() ?? suggestions[0]
@@ -77,11 +77,11 @@ struct HomeSuggestion: Identifiable {
     
     static func getMultiple(count: Int) -> [HomeSuggestion] {
         var all = [
-            HomeSuggestion(type: .dhikr, title: "Günün Zikri", content: "Sübhânallâhi ve bi-hamdihî (Allah'ı hamd ile tesbih ederim)", icon: "hand.tap.fill", color: .orange, actionTitle: "Zikirmatik'i Aç"),
-            HomeSuggestion(type: .quran, title: "Günün Ayeti", content: "Şüphesiz güçlükle beraber bir kolaylık vardır. (İnşirah, 5)", icon: "book.fill", color: .themePrimary, actionTitle: "Kuran-ı Kerim Oku"),
-            HomeSuggestion(type: .esma, title: "Esmaül Hüsna", content: "Er-Rahmân: Dünyada bütün mahlukata şefkat gösteren, mü'min kafir ayırt etmeden herkesi rızıklandıran.", icon: "sparkles", color: .purple, actionTitle: "99 İsim'i İncele"),
-            HomeSuggestion(type: .hadith, title: "Günün Hadisi", content: "Bizi aldatan bizden değildir. (Müslim, Îmân, 164)", icon: "quote.bubble.fill", color: .cyan, actionTitle: "Kütüphane'yi Aç"),
-            HomeSuggestion(type: .dua, title: "Günün Duası", content: "Rabbim! ilmimi artır. (Tâhâ, 114)", icon: "hands.sparkles.fill", color: .indigo, actionTitle: "Duaları Oku")
+            HomeSuggestion(type: .dhikr, title: L10n.Suggestions.Dhikr.title, content: L10n.Suggestions.Dhikr.content, icon: "hand.tap.fill", color: .orange, actionTitle: L10n.Suggestions.Dhikr.action),
+            HomeSuggestion(type: .quran, title: L10n.Suggestions.Quran.title, content: L10n.Suggestions.Quran.content, icon: "book.fill", color: .themePrimary, actionTitle: L10n.Suggestions.Quran.action),
+            HomeSuggestion(type: .esma, title: L10n.Suggestions.Esma.title, content: L10n.Suggestions.Esma.content, icon: "sparkles", color: .purple, actionTitle: L10n.Suggestions.Esma.action),
+            HomeSuggestion(type: .hadith, title: L10n.Suggestions.Hadith.title, content: L10n.Suggestions.Hadith.content, icon: "quote.bubble.fill", color: .cyan, actionTitle: L10n.Suggestions.Hadith.action),
+            HomeSuggestion(type: .dua, title: L10n.Suggestions.Dua.title, content: L10n.Suggestions.Dua.content, icon: "hands.sparkles.fill", color: .indigo, actionTitle: L10n.Suggestions.Dua.action)
         ]
         all.shuffle()
         return Array(all.prefix(count))

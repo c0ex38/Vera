@@ -2,8 +2,8 @@ import SwiftUI
 
 struct DailyContentCard: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Günün İçerikleri")
+        VStack(alignment: .leading, spacing: 18) {
+            Text(L10n.Home.dailyContent)
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.themeText)
                 .padding(.horizontal, 20)

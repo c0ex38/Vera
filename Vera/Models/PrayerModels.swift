@@ -107,3 +107,33 @@ struct PrayerTime: Codable, Identifiable, Equatable, Sendable {
         case qiblaTime = "KibleSaati"
     }
 }
+
+// MARK: - Prayer Type Enum for Logic & Localization
+enum PrayerType: String, CaseIterable, Sendable {
+    case imsak
+    case sunrise
+    case dhuhr
+    case asr
+    case maghrib
+    case isha
+    
+    var localizedName: String {
+        switch self {
+        case .imsak: return L10n.Prayer.imsak
+        case .sunrise: return L10n.Prayer.sunrise
+        case .dhuhr: return L10n.Prayer.dhuhr
+        case .asr: return L10n.Prayer.asr
+        case .maghrib: return L10n.Prayer.maghrib
+        case .isha: return L10n.Prayer.isha
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .imsak, .sunrise: return "sun.haze.fill"
+        case .dhuhr, .asr: return "sun.max.fill"
+        case .maghrib: return "sunset.fill"
+        case .isha: return "moon.stars.fill"
+        }
+    }
+}

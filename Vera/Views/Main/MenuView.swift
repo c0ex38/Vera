@@ -27,12 +27,12 @@ struct MenuView: View {
                     
                     // Tam Merkezlenmiş Premium Header
                     VStack(spacing: 6) {
-                        Text("Keşfet")
+                        Text(L10n.Menu.title)
                             .font(.system(size: 36, weight: .black, design: .rounded))
                             .foregroundColor(.themePrimary)
                             .shadow(color: Color.themePrimary.opacity(0.3), radius: 10, y: 5)
                         
-                        Text("Tüm araçlar ve özellikler")
+                        Text(L10n.Menu.subtitle)
                             .font(.system(size: 14, weight: .semibold, design: .rounded))
                             .foregroundColor(.themeTextSecondary)
                             .tracking(0.5)
@@ -44,110 +44,120 @@ struct MenuView: View {
                         // Aktif Modüller
                         NavigationLink(destination: DhikrView()) {
                             MenuCard(
-                                title: "Zikir",
+                                title: L10n.Menu.zikir,
                                 icon: "hand.tap.default.fill", 
                                 color: .orange,
-                                subtitle: "Tesbih"
+                                subtitle: L10n.Menu.zikirSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: MonthlyImsakiyeViewWrapper()) {
                             MenuCard(
-                                title: "İmsakiye",
+                                title: L10n.Menu.imsakiye,
                                 icon: "calendar.badge.clock",
                                 color: .indigo,
-                                subtitle: "30 Günlük"
+                                subtitle: L10n.Menu.imsakiyeSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: NotificationSettingsView()) {
                             MenuCard(
-                                title: "Alarmlar",
+                                title: L10n.Menu.alarms,
                                 icon: "alarm.fill",
                                 color: .red,
-                                subtitle: "Ezan/Uyarı"
+                                subtitle: L10n.Menu.alarmsSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: PrayerSurahsListView()) {
                             MenuCard(
-                                title: "Sureler",
+                                title: L10n.Menu.surahs,
                                 icon: "book.fill",
                                 color: .brown,
-                                subtitle: "Kur'an"
+                                subtitle: L10n.Menu.surahsSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: EsmaulHusnaListView()) {
                             MenuCard(
-                                title: "E. Hüsna",
+                                title: L10n.Menu.esma,
                                 icon: "sparkles",
                                 color: .purple,
-                                subtitle: "99 İsim"
+                                subtitle: L10n.Menu.esmaSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: QuranIndexView()) {
                             MenuCard(
-                                title: "Kuran",
+                                title: L10n.Menu.quran,
                                 icon: "book.pages.fill",
                                 color: .teal,
-                                subtitle: "Cüz/Ayet"
+                                subtitle: L10n.Menu.quranSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: NearbyMosquesView()) {
                             MenuCard(
-                                title: "Camiler",
+                                title: L10n.Menu.mosques,
                                 icon: "mappin.circle.fill",
                                 color: .green,
-                                subtitle: "Harita"
+                                subtitle: L10n.Menu.mosquesSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: ZakatHomeView()) {
                             MenuCard(
-                                title: "Zekat",
+                                title: L10n.Menu.zakat,
                                 icon: "banknote.fill",
                                 color: .yellow,
-                                subtitle: "Hesapla"
+                                subtitle: L10n.Menu.zakatSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: LibraryListView()) {
                             MenuCard(
-                                title: "Kütüphane",
+                                title: L10n.Menu.library,
                                 icon: "books.vertical.fill",
                                 color: .blue,
-                                subtitle: "Dini Bilgi"
+                                subtitle: L10n.Menu.librarySub
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        NavigationLink(destination: HadithListView()) {
+                            MenuCard(
+                                title: L10n.Menu.hadiths,
+                                icon: "text.quote",
+                                color: .cyan,
+                                subtitle: L10n.Menu.hadithsSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: SermonListView()) {
                             MenuCard(
-                                title: "Hutbe",
+                                title: L10n.Menu.sermon,
                                 icon: "quote.bubble.fill",
-                                color: .cyan,
-                                subtitle: "Haftalık"
+                                color: .teal,
+                                subtitle: L10n.Menu.sermonSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         NavigationLink(destination: SettingsView()) {
                             MenuCard(
-                                title: "Ayarlar",
+                                title: L10n.Menu.settings,
                                 icon: "gearshape.fill",
                                 color: .gray,
-                                subtitle: "Tercihler"
+                                subtitle: L10n.Menu.settingsSub
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -243,7 +253,7 @@ struct MonthlyImsakiyeViewWrapper: View {
                     VStack(spacing: 20) {
                         ProgressView()
                             .scaleEffect(1.5)
-                        Text("İmsakiye Yükleniyor...")
+                        Text(L10n.Menu.loadingImsakiye)
                             .font(.headline)
                             .foregroundColor(.themeTextSecondary)
                     }

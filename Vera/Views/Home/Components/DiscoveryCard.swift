@@ -68,7 +68,7 @@ struct DiscoveryCard: View {
         case .esma: EsmaulHusnaListView()
         case .mosques: NearbyMosquesView()
         case .zakat: ZakatHomeView()
-        case .hadith: LibraryListView() // Hadisler kütüphane içinde
+        case .hadith: HadithListView()
         case .dua: PrayerSurahsListView() // Dualar bu liste içinde
         }
     }

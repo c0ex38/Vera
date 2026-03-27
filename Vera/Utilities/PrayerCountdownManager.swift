@@ -4,9 +4,11 @@ import SwiftUI
 
 @MainActor
 class PrayerCountdownManager: ObservableObject {
-    @Published var nextPrayerName: String = "Hesaplanıyor..."
+    @Published var nextPrayer: PrayerType? = nil
+    @Published var nextPrayerName: String = L10n.Home.loading
     @Published var timeRemainingString: String = "00:00:00"
-    @Published var currentPrayerName: String = "Hesaplanıyor..."
+    @Published var currentPrayer: PrayerType? = nil
+    @Published var currentPrayerName: String = L10n.Home.loading
     @Published var isPrayerTime: Bool = false
     
     private var timer: AnyCancellable?
@@ -41,16 +43,16 @@ class PrayerCountdownManager: ObservableObject {
         
         // Cihazın kendi zaman dilimine göre işlem yapacağız. 
         // Namaz vakitleri sadece düz metin (15:23 vb.) olduğu için Timezone farkını bu noktada çözüyoruz.
-        let prayers = [
-            ("İmsak", times.imsakTime),
-            ("Güneş", times.sunrise),
-            ("Öğle", times.dhuhr),
-            ("İkindi", times.asr),
-            ("Akşam", times.maghrib),
-            ("Yatsı", times.isha)
+        let prayers: [(type: PrayerType, time: String)] = [
+            (.imsak, times.imsakTime),
+            (.sunrise, times.sunrise),
+            (.dhuhr, times.dhuhr),
+            (.asr, times.asr),
+            (.maghrib, times.maghrib),
+            (.isha, times.isha)
         ]
         
-        var nextPrayer: (name: String, date: Date)? = nil
+        var next: (type: PrayerType, date: Date)? = nil
         
         // İlgili saatleri bugünün tarihine Date olarak ekleyip kıyaslıyoruz.
         for prayer in prayers {
@@ -62,14 +64,14 @@ class PrayerCountdownManager: ObservableObject {
                 components.second = 0
                 
                 if let prayerDate = calendar.date(from: components), prayerDate > now {
-                    nextPrayer = (prayer.0, prayerDate)
+                    next = (prayer.type, prayerDate)
                     break
                 }
             }
         }
         
         // Bütün vakitler geçildiyse, yarına (İmsak) kaldık.
-        if nextPrayer == nil, let imsakTime = formatter.date(from: times.imsakTime) {
+        if next == nil, let imsakTime = formatter.date(from: times.imsakTime) {
             var components = calendar.dateComponents([.year, .month, .day], from: now)
             let timeComponents = calendar.dateComponents([.hour, .minute], from: imsakTime)
             components.hour = timeComponents.hour
@@ -79,18 +81,21 @@ class PrayerCountdownManager: ObservableObject {
                 components.day = day + 1 // Yara geçiş
             }
             if let tomorrowImsak = calendar.date(from: components) {
-                nextPrayer = ("İmsak", tomorrowImsak)
+                next = (.imsak, tomorrowImsak)
             }
         }
         
-        if let next = nextPrayer {
-            self.nextPrayerName = next.name
+        if let next = next {
+            self.nextPrayer = next.type
+            self.nextPrayerName = next.type.localizedName
             
             // Mevcut (İçinde Bulunulan) Vakti Hesaplama
-            let prayerNames = ["İmsak", "Güneş", "Öğle", "İkindi", "Akşam", "Yatsı"]
-            if let nextIndex = prayerNames.firstIndex(of: next.name) {
-                let currentIndex = (nextIndex - 1 + prayerNames.count) % prayerNames.count
-                self.currentPrayerName = prayerNames[currentIndex]
+            let prayerTypes = PrayerType.allCases
+            if let nextIndex = prayerTypes.firstIndex(of: next.type) {
+                let currentIndex = (nextIndex - 1 + prayerTypes.count) % prayerTypes.count
+                let currentType = prayerTypes[currentIndex]
+                self.currentPrayer = currentType
+                self.currentPrayerName = currentType.localizedName
             }
             
             let diff = next.date.timeIntervalSince(now)
@@ -103,7 +108,8 @@ class PrayerCountdownManager: ObservableObject {
             
             self.timeRemainingString = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         } else {
-            self.nextPrayerName = "Bilinmiyor"
+            self.nextPrayer = nil
+            self.nextPrayerName = L10n.Home.loading
             self.timeRemainingString = "00:00:00"
             self.isPrayerTime = false
         }

@@ -53,6 +53,10 @@ struct HomeView: View {
                             VeraHeroCard(countdownManager: countdownManager, animateOrbs: animateOrbs)
                             QuickActionsGrid()
                             
+                            if let hadith = viewModel.hadithOfTheDay {
+                                HadithCard(hadith: hadith)
+                            }
+                            
                             VStack(spacing: 16) {
                                 HStack {
                                     Text(L10n.Home.title)
@@ -210,12 +214,12 @@ struct HomeView: View {
     private var timesGrid: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 14), count: UIDevice.current.userInterfaceIdiom == .pad ? 6 : 3), spacing: 14) {
             if let today = viewModel.todayPrayerTime {
-                CompactPrayerCell(title: L10n.Prayer.imsak, time: today.imsakTime, isActive: countdownManager.nextPrayerName == "İmsak")
-                CompactPrayerCell(title: L10n.Prayer.sunrise, time: today.sunrise, isActive: countdownManager.nextPrayerName == "Güneş")
-                CompactPrayerCell(title: L10n.Prayer.dhuhr, time: today.dhuhr, isActive: countdownManager.nextPrayerName == "Öğle")
-                CompactPrayerCell(title: L10n.Prayer.asr, time: today.asr, isActive: countdownManager.nextPrayerName == "İkindi")
-                CompactPrayerCell(title: L10n.Prayer.maghrib, time: today.maghrib, isActive: countdownManager.nextPrayerName == "Akşam")
-                CompactPrayerCell(title: L10n.Prayer.isha, time: today.isha, isActive: countdownManager.nextPrayerName == "Yatsı")
+                CompactPrayerCell(title: L10n.Prayer.imsak, time: today.imsakTime, isActive: countdownManager.nextPrayer == .imsak)
+                CompactPrayerCell(title: L10n.Prayer.sunrise, time: today.sunrise, isActive: countdownManager.nextPrayer == .sunrise)
+                CompactPrayerCell(title: L10n.Prayer.dhuhr, time: today.dhuhr, isActive: countdownManager.nextPrayer == .dhuhr)
+                CompactPrayerCell(title: L10n.Prayer.asr, time: today.asr, isActive: countdownManager.nextPrayer == .asr)
+                CompactPrayerCell(title: L10n.Prayer.maghrib, time: today.maghrib, isActive: countdownManager.nextPrayer == .maghrib)
+                CompactPrayerCell(title: L10n.Prayer.isha, time: today.isha, isActive: countdownManager.nextPrayer == .isha)
             }
         }
         .padding(.horizontal, 20)

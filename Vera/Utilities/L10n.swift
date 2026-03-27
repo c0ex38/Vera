@@ -19,6 +19,10 @@ enum L10n {
         static let retry = NSLocalizedString("home_hata_tekrar_dene", comment: "")
         static let selectLocation = NSLocalizedString("home_konum_sec", comment: "")
         static let waitingLocation = NSLocalizedString("home_konum_bekle", comment: "")
+        static let hadithOfTheDay = NSLocalizedString("home_gunun_hadisi", comment: "")
+        static let dailyContent = NSLocalizedString("home_gunun_icerikleri", comment: "")
+        static let quickAccess = NSLocalizedString("home_hizli_erisim", comment: "")
+        static let discovery = NSLocalizedString("home_kesfet_ogren", comment: "")
     }
     
     enum Hero {
@@ -45,6 +49,7 @@ enum L10n {
         static let next = NSLocalizedString("common_ileri", comment: "")
         static let back = NSLocalizedString("common_geri", comment: "")
         static let finish = NSLocalizedString("common_bitti", comment: "")
+        static let km = NSLocalizedString("common_km", comment: "")
     }
     
     enum Settings {
@@ -234,5 +239,106 @@ enum L10n {
         static let salavat = NSLocalizedString("dhikr_salavat", comment: "")
         static let estagfirullah = NSLocalizedString("dhikr_estagfirullah", comment: "")
         static let free = NSLocalizedString("dhikr_free", comment: "")
+    }
+    
+    enum Menu {
+        static let title = NSLocalizedString("menu_title", comment: "")
+        static let subtitle = NSLocalizedString("menu_subtitle", comment: "")
+        
+        static let zikir = NSLocalizedString("menu_zikir", comment: "")
+        static let zikirSub = NSLocalizedString("menu_zikir_sub", comment: "")
+        
+        static let imsakiye = NSLocalizedString("menu_imsakiye", comment: "")
+        static let imsakiyeSub = NSLocalizedString("menu_imsakiye_sub", comment: "")
+        
+        static let alarms = NSLocalizedString("menu_alarms", comment: "")
+        static let alarmsSub = NSLocalizedString("menu_alarms_sub", comment: "")
+        
+        static let surahs = NSLocalizedString("menu_sureler", comment: "")
+        static let surahsSub = NSLocalizedString("menu_sureler_sub", comment: "")
+        
+        static let esma = NSLocalizedString("menu_esma", comment: "")
+        static let esmaSub = NSLocalizedString("menu_esma_sub", comment: "")
+        
+        static let quran = NSLocalizedString("menu_kuran", comment: "")
+        static let quranSub = NSLocalizedString("menu_kuran_sub", comment: "")
+        
+        static let mosques = NSLocalizedString("menu_camiler", comment: "")
+        static let mosquesSub = NSLocalizedString("menu_camiler_sub", comment: "")
+        
+        static let zakat = NSLocalizedString("menu_zekat", comment: "")
+        static let zakatSub = NSLocalizedString("menu_zekat_sub", comment: "")
+        
+        static let library = NSLocalizedString("menu_library", comment: "")
+        static let librarySub = NSLocalizedString("menu_library_sub", comment: "")
+        
+        static let hadiths = NSLocalizedString("menu_hadiths", comment: "")
+        static let hadithsSub = NSLocalizedString("menu_hadiths_sub", comment: "")
+        
+        static let sermon = NSLocalizedString("menu_sermon", comment: "")
+        static let sermonSub = NSLocalizedString("menu_sermon_sub", comment: "")
+        
+        static let settings = NSLocalizedString("menu_settings", comment: "")
+        static let settingsSub = NSLocalizedString("menu_settings_sub", comment: "")
+        
+        static let loadingImsakiye = NSLocalizedString("menu_loading_imsakiye", comment: "")
+    }
+    
+    enum Hadith {
+        static let title = NSLocalizedString("hadith_title", comment: "")
+        static let searchPlaceholder = NSLocalizedString("hadith_search_placeholder", comment: "")
+    }
+    
+    enum Qibla {
+        static let title = NSLocalizedString("qibla_title", comment: "")
+        static let facing = NSLocalizedString("qibla_facing", comment: "")
+        static let notFacing = NSLocalizedString("qibla_not_facing", comment: "")
+        static let north = NSLocalizedString("qibla_north", comment: "")
+        static let east = NSLocalizedString("qibla_east", comment: "")
+        static let south = NSLocalizedString("qibla_south", comment: "")
+        static let west = NSLocalizedString("qibla_west", comment: "")
+    }
+    
+    enum Esma {
+        static let title = NSLocalizedString("esma_title", comment: "")
+        static let subtitle = NSLocalizedString("esma_subtitle", comment: "")
+    }
+    
+    enum Suggestions {
+        enum Dhikr {
+            static let title = NSLocalizedString("sug_dhikr_title", comment: "")
+            static let content = NSLocalizedString("sug_dhikr_content", comment: "")
+            static let action = NSLocalizedString("sug_dhikr_action", comment: "")
+        }
+        enum Quran {
+            static let title = NSLocalizedString("sug_quran_title", comment: "")
+            static let content = NSLocalizedString("sug_quran_content", comment: "")
+            static let action = NSLocalizedString("sug_quran_action", comment: "")
+        }
+        enum Esma {
+            static let title = NSLocalizedString("sug_esma_title", comment: "")
+            static let content = NSLocalizedString("sug_esma_content", comment: "")
+            static let action = NSLocalizedString("sug_esma_action", comment: "")
+        }
+        enum Hadith {
+            static let title = NSLocalizedString("sug_hadith_title", comment: "")
+            static let content = NSLocalizedString("sug_hadith_content", comment: "")
+            static let action = NSLocalizedString("sug_hadith_action", comment: "")
+        }
+        enum Dua {
+            static let title = NSLocalizedString("sug_dua_title", comment: "")
+            static let content = NSLocalizedString("sug_dua_content", comment: "")
+            static let action = NSLocalizedString("sug_dua_action", comment: "")
+        }
+        enum Mosques {
+            static let title = NSLocalizedString("sug_mosques_title", comment: "")
+            static let content = NSLocalizedString("sug_mosques_content", comment: "")
+            static let action = NSLocalizedString("sug_mosques_action", comment: "")
+        }
+        enum Zakat {
+            static let title = NSLocalizedString("sug_zakat_title", comment: "")
+            static let content = NSLocalizedString("sug_zakat_content", comment: "")
+            static let action = NSLocalizedString("sug_zakat_action", comment: "")
+        }
     }
 }

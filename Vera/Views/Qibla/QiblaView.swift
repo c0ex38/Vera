@@ -37,7 +37,7 @@ struct QiblaView: View {
                     
                     Spacer()
                     
-                    Text("Kıble")
+                    Text(L10n.Qibla.title)
                         .font(.title2.bold())
                         .foregroundColor(viewModel.isFacingQibla ? .white : .themeText)
                     
@@ -107,10 +107,10 @@ struct QiblaView: View {
                         
                         // 4. Sabit Yön Belirteçleri
                         ZStack {
-                            Text("K").font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .bold)).offset(y: UIDevice.current.userInterfaceIdiom == .pad ? -130 : -100)
-                            Text("D").font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 14, weight: .semibold)).offset(x: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 100).opacity(0.4)
-                            Text("G").font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 14, weight: .semibold)).offset(y: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 100).opacity(0.4)
-                            Text("B").font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 14, weight: .semibold)).offset(x: UIDevice.current.userInterfaceIdiom == .pad ? -130 : -100).opacity(0.4)
+                            Text(L10n.Qibla.north).font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .bold)).offset(y: UIDevice.current.userInterfaceIdiom == .pad ? -130 : -100)
+                            Text(L10n.Qibla.east).font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 14, weight: .semibold)).offset(x: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 100).opacity(0.4)
+                            Text(L10n.Qibla.south).font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 14, weight: .semibold)).offset(y: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 100).opacity(0.4)
+                            Text(L10n.Qibla.west).font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 14, weight: .semibold)).offset(x: UIDevice.current.userInterfaceIdiom == .pad ? -130 : -100).opacity(0.4)
                         }
                         .foregroundColor(viewModel.isFacingQibla ? .white : .themeTextSecondary)
                         .rotationEffect(Angle(degrees: -viewModel.heading))
@@ -161,10 +161,10 @@ struct QiblaView: View {
                     
                     // Alt Mesafe ve Bilgi Kartı
                     VStack(spacing: 8) {
-                        Text(viewModel.isFacingQibla ? "KIBLE YÖNÜNDESİNİZ" : "KIBLE'YE DOĞRU DÖNÜN")
-                            .font(.system(size: 12, weight: .black, design: .rounded))
-                            .tracking(2.0)
-                            .foregroundColor(viewModel.isFacingQibla ? .white : .themePrimary)
+                    Text(viewModel.isFacingQibla ? L10n.Qibla.facing : L10n.Qibla.notFacing)
+                        .font(.system(size: 12, weight: .black, design: .rounded))
+                        .tracking(2.0)
+                        .foregroundColor(viewModel.isFacingQibla ? .white : .themePrimary)
                         
                         if viewModel.distanceToQibla > 0 {
                             HStack(alignment: .lastTextBaseline, spacing: 4) {
@@ -172,7 +172,7 @@ struct QiblaView: View {
                                     .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 54 : 36, weight: .heavy, design: .rounded))
                                     .foregroundColor(viewModel.isFacingQibla ? .white : .themeText)
                                 
-                                Text("KM")
+                                Text(L10n.Common.km)
                                     .font(.system(size: 14, weight: .bold, design: .rounded))
                                     .foregroundColor(viewModel.isFacingQibla ? .white.opacity(0.7) : .themeTextSecondary)
                                     .padding(.bottom, 4)

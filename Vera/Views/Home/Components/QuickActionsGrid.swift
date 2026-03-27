@@ -2,12 +2,14 @@ import SwiftUI
 
 struct QuickActionsGrid: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Hızlı Erişim")
-                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 28 : 20, weight: .bold, design: .rounded))
-                .foregroundColor(.themeText)
+        VStack(spacing: 16) {
+            HStack {
+                Text(L10n.Home.quickAccess)
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .foregroundColor(.themeText)
                 .padding(.horizontal, 20)
                 .padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 20 : 0)
+            }
             
             if UIDevice.current.userInterfaceIdiom == .pad {
                 HStack(spacing: 32) {

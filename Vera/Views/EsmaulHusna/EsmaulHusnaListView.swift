@@ -31,8 +31,8 @@ struct EsmaulHusnaListView: View {
             
             VStack(spacing: 0) {
                 VeraCustomHeader(
-                    title: "Esmaül Hüsna",
-                    subtitle: "Allah'ın 99 Güzel İsmi",
+                    title: L10n.Esma.title,
+                    subtitle: L10n.Esma.subtitle,
                     showBackButton: presentationMode.wrappedValue.isPresented
                 )
                 .padding(.bottom, 10)

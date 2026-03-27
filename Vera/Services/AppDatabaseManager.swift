@@ -242,4 +242,41 @@ actor AppDatabaseManager: DatabaseProvider {
         sqlite3_finalize(statement)
         return results
     }
+    
+    // MARK: - Hadisler
+    func fetchHadithOfTheDay() -> Hadith? {
+        let query = "SELECT id, hadith_no, content FROM hadiths ORDER BY RANDOM() LIMIT 1"
+        var statement: OpaquePointer?
+        var result: Hadith?
+        
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+            if sqlite3_step(statement) == SQLITE_ROW {
+                let id = Int(sqlite3_column_int(statement, 0))
+                let no = Int(sqlite3_column_int(statement, 1))
+                let content = String(cString: sqlite3_column_text(statement, 2))
+                
+                result = Hadith(id: id, hadithNo: no, content: content)
+            }
+        }
+        sqlite3_finalize(statement)
+        return result
+    }
+    
+    func fetchAllHadiths() -> [Hadith] {
+        let query = "SELECT id, hadith_no, content FROM hadiths ORDER BY hadith_no ASC"
+        var statement: OpaquePointer?
+        var results = [Hadith]()
+        
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+            while sqlite3_step(statement) == SQLITE_ROW {
+                let id = Int(sqlite3_column_int(statement, 0))
+                let no = Int(sqlite3_column_int(statement, 1))
+                let content = String(cString: sqlite3_column_text(statement, 2))
+                
+                results.append(Hadith(id: id, hadithNo: no, content: content))
+            }
+        }
+        sqlite3_finalize(statement)
+        return results
+    }
 }

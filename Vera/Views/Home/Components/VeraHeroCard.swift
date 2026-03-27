@@ -17,7 +17,7 @@ struct VeraHeroCard: View {
             VStack(alignment: .center, spacing: 20) {
                 // Üst Etiket
                 HStack(spacing: 8) {
-                    Image(systemName: iconForNextPrayer(countdownManager.nextPrayerName))
+                    Image(systemName: iconForNextPrayer(countdownManager.nextPrayer))
                         .font(.system(size: 20))
                         .foregroundColor(.themePrimary)
                     
@@ -58,13 +58,7 @@ struct VeraHeroCard: View {
         .offset(y: animateOrbs ? -8 : 8)
     }
     
-    private func iconForNextPrayer(_ prayerName: String) -> String {
-        switch prayerName.lowercased() {
-        case "i̇msak", "imsak", "güneş", "gunes": return "sun.haze.fill"
-        case "öğle", "ogle", "ikindi": return "sun.max.fill"
-        case "akşam", "aksam": return "sunset.fill"
-        case "yatsı", "yatsi": return "moon.stars.fill"
-        default: return "clock.fill"
-        }
+    private func iconForNextPrayer(_ type: PrayerType?) -> String {
+        return type?.iconName ?? "clock.fill"
     }
 }

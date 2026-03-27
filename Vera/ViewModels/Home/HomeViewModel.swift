@@ -9,6 +9,7 @@ class HomeViewModel: ObservableObject {
     @Published var state: ViewState = .idle
     @Published var prayerTimes: [PrayerTime] = []
     @Published var resolvedLocationName: String = ""
+    @Published var hadithOfTheDay: Hadith? = nil
     
     // Uygulama genelinde sadece bugünü bulabilmek için yardımcı hesaplanmış değişken
     var todayPrayerTime: PrayerTime? {
@@ -63,6 +64,12 @@ class HomeViewModel: ObservableObject {
     }
 
     func start() {
+        // Günün hadisini yükle
+        Task {
+            let manager = AppDatabaseManager.shared
+            self.hadithOfTheDay = await manager.fetchHadithOfTheDay()
+        }
+        
         if autoLocationEnabled {
             state = .requestingLocation
             locationManager.requestLocation()

@@ -19,7 +19,11 @@
 "home_yukleniyor" = "Vakitler Yükleniyor...";
 "home_hata_tekrar_dene" = "Tekrar Dene";
 "home_konum_sec" = "Konum Seçin";
-"home_konum_bekle" = "Lütfen bir konum seçin veya bekleyin.";
+"home_konum_bekle" = "Konumun belirlenmesi bekleniyor...";
+"home_gunun_hadisi" = "Günün Hadis-i Şerifi";
+"home_gunun_icerikleri" = "Günün İçerikleri";
+"home_hizli_erisim" = "Hızlı Erişim";
+"home_kesfet_ogren" = "Keşfet & Öğren";
 
 // MARK: - Hero Card
 "hero_vakit_kalan" = "%@ VAKTİNE KALAN SÜRE";
@@ -195,3 +199,81 @@
 "dhikr_salavat" = "Salavat-ı Şerife";
 "dhikr_estagfirullah" = "Estağfirullah";
 "dhikr_free" = "Serbest Zikir";
+
+// MARK: - Menu
+"menu_title" = "Keşfet";
+"menu_subtitle" = "Tüm araçlar ve özellikler";
+"menu_zikir" = "Zikir";
+"menu_zikir_sub" = "Tesbih";
+"menu_imsakiye" = "İmsakiye";
+"menu_imsakiye_sub" = "30 Günlük";
+"menu_alarmlar" = "Alarmlar";
+"menu_alarmlar_sub" = "Ezan/Uyarı";
+"menu_sureler" = "Sureler";
+"menu_sureler_sub" = "Kur'an";
+"menu_esma" = "E. Hüsna";
+"menu_esma_sub" = "99 İsim";
+"menu_kuran" = "Kuran";
+"menu_kuran_sub" = "Cüz/Ayet";
+"menu_camiler" = "Camiler";
+"menu_camiler_sub" = "Harita";
+"menu_zekat" = "Zekat";
+"menu_zekat_sub" = "Hesapla";
+"menu_library" = "Kütüphane";
+"menu_library_sub" = "Dini Bilgi";
+"menu_hadiths" = "Hadisler";
+"menu_hadiths_sub" = "999 Hadis";
+"menu_sermon" = "Hutbe";
+"menu_sermon_sub" = "Haftalık";
+"menu_settings" = "Ayarlar";
+"menu_settings_sub" = "Tercihler";
+"menu_loading_imsakiye" = "İmsakiye Yükleniyor...";
+
+// MARK: - Hadith
+"hadith_title" = "Hadis-i Şerifler";
+"hadith_search_placeholder" = "Hadislerde ara...";
+
+// MARK: - Qibla
+"qibla_title" = "Kıble";
+"qibla_facing" = "KIBLE YÖNÜNDESİNİZ";
+"qibla_not_facing" = "KIBLE'YE DOĞRU DÖNÜN";
+"qibla_north" = "K";
+"qibla_east" = "D";
+"qibla_south" = "G";
+"qibla_west" = "B";
+
+// MARK: - Esmaul Husna
+"esma_title" = "Esmaül Hüsna";
+"esma_subtitle" = "Allah'ın 99 Güzel İsmi";
+
+// MARK: - Units
+"common_km" = "KM";
+
+// MARK: - Suggestions
+"sug_dhikr_title" = "Günün Zikri";
+"sug_dhikr_content" = "Sübhânallâhi ve bi-hamdihî (Allah'ı hamd ile tesbih ederim)";
+"sug_dhikr_action" = "Zikirmatik'i Aç";
+
+"sug_quran_title" = "Günün Ayeti";
+"sug_quran_content" = "Şüphesiz güçlükle beraber bir kolaylık vardır. (İnşirah, 5)";
+"sug_quran_action" = "Kuran-ı Kerim Oku";
+
+"sug_esma_title" = "Esmaül Hüsna";
+"sug_esma_content" = "Er-Rahmân: Dünyada bütün mahlukata şefkat gösteren, mü'min kafir ayırt etmeden herkesi rızıklandıran.";
+"sug_esma_action" = "99 İsim'i İncele";
+
+"sug_hadith_title" = "Günün Hadisi";
+"sug_hadith_content" = "Bizi aldatan bizden değildir. (Müslim, Îmân, 164)";
+"sug_hadith_action" = "Hadisleri Keşfet";
+
+"sug_dua_title" = "Günün Duası";
+"sug_dua_content" = "Rabbim! ilmimi artır. (Tâhâ, 114)";
+"sug_dua_action" = "Duaları Oku";
+
+"sug_mosques_title" = "Cami Bul";
+"sug_mosques_content" = "Çevrenizdeki camileri ve mescitleri harita üzerinden hızlıca bulun.";
+"sug_mosques_action" = "Haritayı Aç";
+
+"sug_zakat_title" = "Zekat Hesabı";
+"sug_zakat_content" = "Varlıklarınızın zekat miktarını Diyanet fetvalarına uygun şekilde hesaplayın.";
+"sug_zakat_action" = "Hesaplamaya Başla";
