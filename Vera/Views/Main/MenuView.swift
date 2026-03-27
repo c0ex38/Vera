@@ -46,7 +46,7 @@ struct MenuView: View {
                     // Menü Grid'i (Glassmorphic, 3 Sütun)
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: columns, spacing: 16) {
-                            menuItem(module: .zikir, title: L10n.Menu.zikir, icon: "hand.tap.default.fill", color: .orange, subtitle: L10n.Menu.zikirSub)
+                            menuItem(module: .zikir, title: L10n.Menu.zikir, icon: "hand.tap.fill", color: .orange, subtitle: L10n.Menu.zikirSub)
                             menuItem(module: .imsakiye, title: L10n.Menu.imsakiye, icon: "calendar.badge.clock", color: .indigo, subtitle: L10n.Menu.imsakiyeSub)
                             menuItem(module: .alarms, title: L10n.Menu.alarms, icon: "alarm.fill", color: .red, subtitle: L10n.Menu.alarmsSub)
                             menuItem(module: .surahs, title: L10n.Menu.surahs, icon: "book.fill", color: .brown, subtitle: L10n.Menu.surahsSub)
