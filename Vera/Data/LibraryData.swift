@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LibraryData {
     static let categories: [LibraryCategory] = [
-        LibraryCategory(id: "namaz", title: "Namaz", icon: "figure.prayer", color: .blue, description: "Namazın şartları, rükünleri ve kılınış rehberi."),
+        LibraryCategory(id: "namaz", title: "Namaz", icon: "figure.hands.folded", color: .blue, description: "Namazın şartları, rükünleri ve kılınış rehberi."),
         LibraryCategory(id: "oruc", title: "Oruç", icon: "moon.stars.fill", color: .orange, description: "Ramazan orucu, kaza ve kefaret bilgileri."),
         LibraryCategory(id: "hac", title: "Hac ve Umre", icon: "house.fill", color: .green, description: "Kutsal topraklar ve ibadetlerin yapılışı."),
         LibraryCategory(id: "temizlik", title: "Temizlik", icon: "drop.fill", color: .cyan, description: "Abdest, boy abdesti ve teyemmüm hükümleri."),

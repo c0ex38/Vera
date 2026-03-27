@@ -25,10 +25,10 @@ class SermonService {
         // tr role="row" içindeki td'leri hedefliyoruz
         // Not: SharePoint HTML'i karmaşık olduğu için regex biraz esnek olmalı
         
-        let rowPattern = "<tr[^>]*role=\"row\"[^>]*>(.*?)</tr>"
+        let rowPattern = "<tr[^>]*>(.*?)</tr>"
         let cellPattern = "<td[^>]*>(.*?)</td>"
         let linkPattern = "href=\"([^\"]+?\\.pdf)\""
-        let datePattern = "title=\"(\\d{2}\\.\\d{2}\\.\\d{4})\""
+        let datePattern = "(\\d{2}\\.\\d{2}\\.\\d{4})" // Herhangi bir yerdeki tarih formatını bul
         
         do {
             let rowRegex = try NSRegularExpression(pattern: rowPattern, options: [.dotMatchesLineSeparators])
@@ -44,29 +44,29 @@ class SermonService {
                 let nsRowContent = rowContent as NSString
                 let cellMatches = cellRegex.matches(in: rowContent, options: [], range: NSRange(location: 0, length: nsRowContent.length))
                 
-                // Beklenen hücre yapısı: 0: Checkbox, 1: Tarih, 2: Başlık, 3: PDF Link
-                if cellMatches.count >= 4 {
-                    let dateCell = nsRowContent.substring(with: cellMatches[1].range(at: 1))
-                    let titleCell = nsRowContent.substring(with: cellMatches[2].range(at: 1))
-                    let linkCell = nsRowContent.substring(with: cellMatches[3].range(at: 1))
+                // Beklenen hücre yapısı: 0: Checkbox (veya boş), 1: Tarih, 2: Başlık, 3: PDF Link
+                if cellMatches.count >= 3 {
+                    let combinedContent = nsRowContent as String
                     
-                    // Temizlik (HTML tag'lerini kaldır)
-                    let title = titleCell.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
-                    
-                    // Tarih ayıklama
+                    // Tarih ayıklama (Tüm satırda ara, daha garantidir)
                     var date = ""
-                    if let dateMatch = dateRegex.firstMatch(in: dateCell, options: [], range: NSRange(location: 0, length: (dateCell as NSString).length)) {
-                        date = (dateCell as NSString).substring(with: dateMatch.range(at: 1))
-                    } else {
-                        date = dateCell.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
+                    if let dateMatch = dateRegex.firstMatch(in: combinedContent, options: [], range: NSRange(location: 0, length: (combinedContent as NSString).length)) {
+                        date = (combinedContent as NSString).substring(with: dateMatch.range(at: 1))
                     }
                     
-                    // Link ayıklama
+                    // Link ve Başlık ayıklama
                     var pdfURL = ""
-                    if let linkMatch = linkRegex.firstMatch(in: linkCell, options: [], range: NSRange(location: 0, length: (linkCell as NSString).length)) {
-                        let relativePath = (linkCell as NSString).substring(with: linkMatch.range(at: 1))
-                        pdfURL = baseURL + relativePath
+                    var title = ""
+                    
+                    // Linki bul
+                    if let linkMatch = linkRegex.firstMatch(in: combinedContent, options: [], range: NSRange(location: 0, length: (combinedContent as NSString).length)) {
+                        let relativePath = (combinedContent as NSString).substring(with: linkMatch.range(at: 1))
+                        pdfURL = baseURL + (relativePath.starts(with: "/") ? relativePath : "/" + relativePath)
                     }
+                    
+                    // Başlığı bul (cell 2 genellikle en temiz yerdir, ama link hücresinde de olabilir)
+                    let candidateCell = nsRowContent.substring(with: cellMatches[min(2, cellMatches.count - 1)].range(at: 1))
+                    title = candidateCell.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
                     
                     if !title.isEmpty && !date.isEmpty && !pdfURL.isEmpty {
                         let sermon = Sermon(date: date, title: title, pdfURL: pdfURL, audioURL: nil)
