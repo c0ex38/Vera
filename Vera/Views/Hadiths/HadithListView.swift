@@ -16,28 +16,70 @@ struct HadithListView: View {
         }
     }
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         ZStack {
             Color.themeBackground.ignoresSafeArea()
             
-            VStack {
-                if isLoading {
-                    ProgressView()
-                } else {
-                    List {
-                        ForEach(filteredHadiths) { hadith in
-                            HadithRow(hadith: hadith)
-                                .listRowSeparator(.hidden)
-                                .listRowBackground(Color.clear)
+            VStack(spacing: 0) {
+                // Özel Header
+                VeraCustomHeader(title: L10n.Hadith.title)
+                    .padding(.bottom, 10)
+                
+                // Özel Arama Çubuğu
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.themeTextSecondary)
+                        .font(.system(size: 16, weight: .bold))
+                    
+                    TextField(L10n.Hadith.searchPlaceholder, text: $searchText)
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .foregroundColor(.themeText)
+                    
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.themeTextSecondary)
                         }
                     }
-                    .listStyle(.plain)
-                    .searchable(text: $searchText, prompt: L10n.Hadith.searchPlaceholder)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .fill(Color.themeSurface.opacity(0.4))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                        )
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 16)
+                
+                if isLoading {
+                    Spacer()
+                    ProgressView()
+                        .tint(.themePrimary)
+                    Spacer()
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(spacing: 16) {
+                            ForEach(Array(filteredHadiths.enumerated()), id: \.element.id) { index, hadith in
+                                NavigationLink(destination: HadithPageView(hadiths: filteredHadiths, selectedIndex: index)) {
+                                    HadithRow(hadith: hadith)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 4)
+                        .padding(.bottom, 30)
+                    }
                 }
             }
         }
-        .navigationTitle(L10n.Hadith.title)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarHidden(true)
         .onAppear {
             loadHadiths()
         }
@@ -57,37 +99,50 @@ struct HadithRow: View {
     let hadith: Hadith
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 14) {
             HStack {
-                Text("#\(hadith.hadithNo)")
-                    .font(.system(size: 14, weight: .bold, design: .monospaced))
-                    .foregroundColor(.themePrimary)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color.themePrimary.opacity(0.1))
-                    .clipShape(Capsule())
+                HStack(spacing: 6) {
+                    Image(systemName: "number")
+                        .font(.system(size: 10, weight: .bold))
+                    Text("\(hadith.hadithNo)")
+                        .font(.system(size: 14, weight: .bold, design: .monospaced))
+                }
+                .foregroundColor(.themePrimary)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(Color.themePrimary.opacity(0.1))
+                .clipShape(Capsule())
                 
                 Spacer()
                 
-                Button(action: {
-                    UIPasteboard.general.string = hadith.content
-                }) {
-                    Image(systemName: "doc.on.doc")
-                        .foregroundColor(.themeTextSecondary)
-                }
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.themeTextSecondary.opacity(0.5))
             }
             
             Text(hadith.content)
-                .font(.veraContent)
+                .font(.system(size: 16, weight: .medium, design: .serif))
                 .foregroundColor(.themeText)
-                .lineSpacing(4)
+                .lineSpacing(5)
+                .lineLimit(4)
+                .multilineTextAlignment(.leading)
+            
+            HStack {
+                Spacer()
+                Image(systemName: "quote.bubble.fill")
+                    .font(.system(size: 14))
+                    .foregroundColor(.themePrimary.opacity(0.3))
+            }
         }
         .padding(20)
         .background(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color.themeSurface.opacity(0.6))
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color.themeSurface.opacity(0.5))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                )
         )
-        .padding(.horizontal, 4)
-        .padding(.vertical, 8)
+        .shadow(color: Color.black.opacity(0.04), radius: 10, x: 0, y: 5)
     }
 }

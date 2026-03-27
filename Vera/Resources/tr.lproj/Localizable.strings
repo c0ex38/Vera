@@ -207,8 +207,8 @@
 "menu_zikir_sub" = "Tesbih";
 "menu_imsakiye" = "İmsakiye";
 "menu_imsakiye_sub" = "30 Günlük";
-"menu_alarmlar" = "Alarmlar";
-"menu_alarmlar_sub" = "Ezan/Uyarı";
+"menu_alarms" = "Alarmlar";
+"menu_alarms_sub" = "Ezan/Uyarı";
 "menu_sureler" = "Sureler";
 "menu_sureler_sub" = "Kur'an";
 "menu_esma" = "E. Hüsna";

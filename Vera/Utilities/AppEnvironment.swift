@@ -14,6 +14,9 @@ struct AppEnvironment: EnvironmentProvider {
     /// Google AdMob Açılış Ekranı Reklam Kimliği (App Open Unit ID)
     let admobAppOpenID: String
     
+    /// Google AdMob Geçiş Reklamı Kimliği (Interstitial Unit ID)
+    let admobInterstitialID: String
+    
     /// Ezan Vakti API Ana Sunucu Adresi
     let apiBaseURL: String
 
@@ -25,6 +28,7 @@ struct AppEnvironment: EnvironmentProvider {
         self.admobAppID = infoDictionary["GADApplicationIdentifier"] as? String ?? ""
         self.admobBannerID = infoDictionary["AdMobBannerID"] as? String ?? ""
         self.admobAppOpenID = infoDictionary["AdMobAppOpenID"] as? String ?? "ca-app-pub-3565786409265176/2231812288"
+        self.admobInterstitialID = infoDictionary["AdMobInterstitialID"] as? String ?? ""
         self.apiBaseURL = infoDictionary["ApiBaseUrl"] as? String ?? ""
         
         #if DEBUG

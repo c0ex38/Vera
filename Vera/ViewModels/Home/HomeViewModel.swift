@@ -90,11 +90,13 @@ class HomeViewModel: ObservableObject {
         // Manuel seçim yapıldığında koordinatları da bulmaya çalışalım (Global Sync için)
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(locationName) { [weak self] placemarks, _ in
-            if let coordinate = placemarks?.first?.location?.coordinate {
-                Task { @MainActor in
-                    self?.savedLatitude = coordinate.latitude
-                    self?.savedLongitude = coordinate.longitude
-                }
+            guard let coordinate = placemarks?.first?.location?.coordinate else { return }
+            let lat = coordinate.latitude
+            let lon = coordinate.longitude
+            
+            Task { @MainActor [weak self] in
+                self?.savedLatitude = lat
+                self?.savedLongitude = lon
             }
         }
         

@@ -189,8 +189,8 @@
 "menu_zikir_sub" = "Tasbih";
 "menu_imsakiye" = "Imsakiye";
 "menu_imsakiye_sub" = "30-Day";
-"menu_alarmlar" = "Alarms";
-"menu_alarmlar_sub" = "Adhan/Alert";
+"menu_alarms" = "Alarms";
+"menu_alarms_sub" = "Adhan/Alert";
 "menu_sureler" = "Surahs";
 "menu_sureler_sub" = "Quran";
 "menu_esma" = "99 Names";

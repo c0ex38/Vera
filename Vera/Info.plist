@@ -14,6 +14,8 @@
 	<string>$(ADMOB_BANNER_ID)</string>
 	<key>AdMobAppOpenID</key>
 	<string>$(ADMOB_APP_OPEN_ID)</string>
+	<key>AdMobInterstitialID</key>
+	<string>$(ADMOB_INTERSTITIAL_ID)</string>
 	<key>ApiBaseUrl</key>
 	<string>$(API_BASE_URL)</string>
 	<key>SKAdNetworkItems</key>

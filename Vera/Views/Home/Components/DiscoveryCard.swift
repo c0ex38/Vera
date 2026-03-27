@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DiscoveryCard: View {
     let suggestion: HomeSuggestion
+    @State private var navigateToDetail = false
     
     var body: some View {
         ZStack {
@@ -39,7 +40,11 @@ struct DiscoveryCard: View {
                     .lineSpacing(6)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                NavigationLink(destination: destinationFor(suggestion.type)) {
+                Button(action: {
+                    InterstitialAdManager.shared.showAdIfAvailable {
+                        navigateToDetail = true
+                    }
+                }) {
                     HStack {
                         Text(suggestion.actionTitle)
                             .font(.veraAction)
@@ -55,6 +60,12 @@ struct DiscoveryCard: View {
                             .shadow(color: suggestion.color.opacity(0.3), radius: 10, y: 5)
                     )
                 }
+                .background(
+                    NavigationLink(destination: destinationFor(suggestion.type), isActive: $navigateToDetail) {
+                        EmptyView()
+                    }
+                    .hidden()
+                )
             }
             .padding(28)
         }
