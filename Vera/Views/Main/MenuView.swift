@@ -1,21 +1,18 @@
 import SwiftUI
 
-struct MenuView: View {
+struct MenuView: some View {
+    @State private var navigateToModule = false
+    @State private var selectedModule: MenuModule?
+    
+    // Grid Yapılandırması (3 Sütun)
     let columns = [
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12)
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
     ]
     
-    @State private var selectedModule: MenuModule?
-    @State private var navigateToModule = false
-    
-    enum MenuModule: Hashable {
-        case zikir, imsakiye, alarms, surahs, esma, quran, mosques, zakat, library, hadiths, sermon, settings
-    }
-    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Derin Tema Arkaplanı
                 Color.themeBackground.ignoresSafeArea()
@@ -28,16 +25,6 @@ struct MenuView: View {
                     endRadius: 400
                 )
                 .ignoresSafeArea()
-                
-                // Gizli NavigationLink (Tetikleyici)
-                if let module = selectedModule {
-                    NavigationLink(
-                        destination: destinationView(for: module),
-                        isActive: $navigateToModule
-                    ) {
-                        EmptyView()
-                    }
-                }
                 
                 VStack(spacing: 24) {
                     Spacer(minLength: 10)
@@ -79,21 +66,54 @@ struct MenuView: View {
                 }
             }
             .navigationBarHidden(true)
+            .navigationDestination(isPresented: $navigateToModule) {
+                if let module = selectedModule {
+                    destinationView(for: module)
+                }
+            }
         }
-        .navigationViewStyle(.stack)
     }
     
     @ViewBuilder
     private func menuItem(module: MenuModule, title: String, icon: String, color: Color, subtitle: String) -> some View {
-        Button {
+        Button(action: {
             handleModuleSelection(module)
-        } label: {
-            MenuCard(
-                title: title,
-                icon: icon,
-                color: color,
-                subtitle: subtitle
+        }) {
+            VStack(spacing: 12) {
+                // Ikon Alanı (Glassmorphic Circle)
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.15))
+                        .frame(width: 56, height: 56)
+                    
+                    Image(systemName: icon)
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(color)
+                }
+                
+                VStack(spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .foregroundColor(.themeText)
+                        .lineLimit(1)
+                    
+                    Text(subtitle)
+                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .foregroundColor(.themeTextSecondary)
+                        .lineLimit(1)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.themeSurface.opacity(0.4))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 24)
+                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                    )
             )
+            .shadow(color: .black.opacity(0.03), radius: 10, y: 5)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -101,128 +121,45 @@ struct MenuView: View {
     private func handleModuleSelection(_ module: MenuModule) {
         selectedModule = module
         
-        // Reklamı tetikle
+        // Interstitial Reklam Tetikleyicisi
         InterstitialAdManager.shared.showAdIfAvailable {
-            self.navigateToModule = true
+            navigateToModule = true
         }
     }
     
     @ViewBuilder
     private func destinationView(for module: MenuModule) -> some View {
         switch module {
-        case .zikir: DhikrView()
-        case .imsakiye: MonthlyImsakiyeViewWrapper()
-        case .alarms: NotificationSettingsView()
-        case .surahs: PrayerSurahsListView()
-        case .esma: EsmaulHusnaListView()
-        case .quran: QuranIndexView()
-        case .mosques: NearbyMosquesView()
-        case .zakat: ZakatHomeView()
-        case .library: LibraryListView()
-        case .hadiths: HadithListView()
-        case .sermon: SermonListView()
-        case .settings: SettingsView()
+        case .zikir:
+            DhikrView()
+        case .imsakiye:
+            ImsakiyeView()
+        case .alarms:
+            NotificationSettingsView()
+        case .surahs:
+             PrayerSurahListView()
+        case .esma:
+            EsmaulHusnaView()
+        case .quran:
+            QuranIndexView()
+        case .mosques:
+            NearbyMosquesView()
+        case .zakat:
+            ZakatCalculatorView()
+        case .library:
+            LibraryView()
+        case .hadiths:
+            HadithListView()
+        case .sermon:
+            SermonView()
+        case .settings:
+            SettingsView()
         }
     }
 }
 
-// MARK: - Ultra-Premium Menü Kartı Tasarımı (Kompakt 3 Sütun)
-struct MenuCard: View {
-    let title: String
-    let icon: String
-    let color: Color
-    let subtitle: String
-    var isComingSoon: Bool = false
-    
-    var body: some View {
-        VStack(alignment: .center, spacing: 10) {
-            // İkon Havuzu (Icon Container)
-            ZStack {
-                // Şık Gradient Arkaplan
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(
-                        LinearGradient(
-                            colors: [
-                                isComingSoon ? Color.gray.opacity(0.15) : color.opacity(0.2),
-                                isComingSoon ? Color.gray.opacity(0.05) : color.opacity(0.05)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 48, height: 48)
-                
-                // Canlı veya Silik İkon
-                Image(systemName: icon == "hand.tap.default.fill" ? "hand.tap.fill" : icon)
-                    .font(.system(size: 22, weight: .medium))
-                    .foregroundColor(isComingSoon ? .gray.opacity(0.6) : color)
-                    .shadow(color: isComingSoon ? .clear : color.opacity(0.3), radius: 5, y: 3)
-            }
-            
-            // Metin Alanı
-            VStack(alignment: .center, spacing: 2) {
-                Text(title)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .foregroundColor(isComingSoon ? .themeTextSecondary.opacity(0.8) : .themeText)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                
-                Text(subtitle)
-                    .font(.system(size: 9, weight: .medium, design: .rounded))
-                    .foregroundColor(isComingSoon ? .orange.opacity(0.9) : .themeTextSecondary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-            }
-        }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 14)
-        .frame(maxWidth: .infinity, idealHeight: 110)
-        // Glassmorphic Zemin
-        .background(Color.themeSurface)
-        .cornerRadius(20)
-        // Işık/Gölge Oyunları
-        .overlay(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(isComingSoon ? Color.clear : color.opacity(0.15), lineWidth: 1)
-        )
-        .shadow(color: isComingSoon ? .clear : .black.opacity(0.05), radius: 8, y: 4)
-        .opacity(isComingSoon ? 0.7 : 1.0)
-    }
-}
-
-// İmsakiye Verilerini Çekip Gösteren Aracı Görünüm
-struct MonthlyImsakiyeViewWrapper: View {
-    @EnvironmentObject var homeVM: HomeViewModel
-    @AppStorage("savedDistrictID") var savedDistrictID: String = ""
-    @AppStorage("savedLocationName") var savedLocationName: String = ""
-    
-    var body: some View {
-        Group {
-            if homeVM.prayerTimes.isEmpty {
-                ZStack {
-                    Color.themeBackground.ignoresSafeArea()
-                    VStack(spacing: 20) {
-                        ProgressView()
-                            .scaleEffect(1.5)
-                        Text(L10n.Menu.loadingImsakiye)
-                            .font(.headline)
-                            .foregroundColor(.themeTextSecondary)
-                    }
-                }
-                .navigationBarHidden(true)
-                .onAppear {
-                    if !savedDistrictID.isEmpty {
-                        homeVM.fetchSavedLocationTimes(districtID: savedDistrictID, locationName: savedLocationName)
-                    }
-                }
-            } else {
-                MonthlyImsakiyeView()
-                    .navigationBarHidden(true)
-            }
-        }
-    }
+enum MenuModule: String, CaseIterable {
+    case zikir, imsakiye, alarms, surahs, esma, quran, mosques, zakat, library, hadiths, sermon, settings
 }
 
 #Preview {

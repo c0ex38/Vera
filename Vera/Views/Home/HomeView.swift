@@ -17,7 +17,7 @@ struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.themeBackground.ignoresSafeArea()
                 
@@ -160,7 +160,6 @@ struct HomeView: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
     }
     
     // MARK: - Subviews

@@ -60,12 +60,9 @@ struct DiscoveryCard: View {
                             .shadow(color: suggestion.color.opacity(0.3), radius: 10, y: 5)
                     )
                 }
-                .background(
-                    NavigationLink(destination: destinationFor(suggestion.type), isActive: $navigateToDetail) {
-                        EmptyView()
-                    }
-                    .hidden()
-                )
+                .navigationDestination(isPresented: $navigateToDetail) {
+                    destinationFor(suggestion.type)
+                }
             }
             .padding(28)
         }
