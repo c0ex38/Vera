@@ -205,6 +205,7 @@ enum L10n {
         static let notFound = NSLocalizedString("mosques_not_found", comment: "")
         static let directions = NSLocalizedString("mosques_get_directions", comment: "")
         static let unknown = NSLocalizedString("mosques_unknown", comment: "")
+        static let searchQuery = NSLocalizedString("mosques_search_query", comment: "")
     }
 
     enum Quran {

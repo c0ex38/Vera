@@ -14,9 +14,9 @@ struct VeraHeroCard: View {
                         .stroke(LinearGradient(colors: [Color.white.opacity(0.5), .clear], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
                 )
             
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .center, spacing: 20) {
                 // Üst Etiket
-                HStack {
+                HStack(spacing: 8) {
                     Image(systemName: iconForNextPrayer(countdownManager.nextPrayerName))
                         .font(.system(size: 20))
                         .foregroundColor(.themePrimary)
@@ -25,8 +25,6 @@ struct VeraHeroCard: View {
                         .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 13, weight: .black, design: .rounded))
                         .foregroundColor(.themeTextSecondary)
                         .kerning(1.2)
-                    
-                    Spacer()
                 }
                 
                 // Devasa Hassas Sayaç
@@ -36,6 +34,7 @@ struct VeraHeroCard: View {
                     .monospacedDigit()
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .multilineTextAlignment(.center)
                 
                 // Mevcut Vakit Bilgisi
                 HStack(spacing: 6) {
@@ -51,6 +50,7 @@ struct VeraHeroCard: View {
                         .clipShape(Capsule())
                 }
             }
+            .frame(maxWidth: .infinity)
             .padding(28)
         }
         .cornerRadius(32)

@@ -4,37 +4,15 @@ import MapKit
 struct NearbyMosquesView: View {
     @EnvironmentObject var container: DependencyContainer
     @StateObject private var viewModel = NearbyMosquesViewModel()
-    // iOS 17+ Map Position
     @State private var position: MapCameraPosition = .automatic
     @State private var selectedMosque: MKMapItem?
     
     // Back navigation dismiss
     @Environment(\.presentationMode) var presentationMode
     
-    var body: some View {
-        VStack(spacing: 0) {
-            header
-            
-            ZStack(alignment: .bottom) {
-                mapView
-                statusOverlay
-                detailOverlay
-            }
-        }
-        .navigationBarHidden(true)
-        .onAppear {
-            container.location.requestLocation()
-        }
-        .onReceive(container.location.finalLocationPublisher) { newValue in
-            if let loc = newValue, viewModel.mosques.isEmpty && !viewModel.isLoading {
-                position = .region(MKCoordinateRegion(
-                    center: loc.coordinate,
-                    span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-                ))
-                viewModel.fetchNearbyMosques(near: loc)
-            }
-        }
-    }
+    @State private var hasMoved = false
+    @State private var lastSearchCoordinate: CLLocationCoordinate2D?
+    @State private var currentMapRegion: MKCoordinateRegion?
     
     private var header: some View {
         HStack {
@@ -63,8 +41,9 @@ struct NearbyMosquesView: View {
                     withAnimation {
                         position = .region(MKCoordinateRegion(
                             center: location.coordinate,
-                            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
                         ))
+                        lastSearchCoordinate = location.coordinate
                     }
                 }
             }) {
@@ -85,6 +64,67 @@ struct NearbyMosquesView: View {
         .zIndex(1)
     }
     
+    var body: some View {
+        VStack(spacing: 0) {
+            header
+            
+            ZStack(alignment: .bottom) {
+                mapView
+                
+                // Burayı Ara Butonu
+                if hasMoved {
+                    VStack {
+                        Button(action: {
+                            searchInCurrentArea()
+                        }) {
+                            HStack {
+                                Image(systemName: "magnifyingglass")
+                                Text("Bu Bölgede Ara")
+                            }
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(Color.themePrimary)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
+                        .padding(.top, 20)
+                        Spacer()
+                    }
+                }
+                
+                statusOverlay
+                detailOverlay
+            }
+        }
+        .navigationBarHidden(true)
+        .onAppear {
+            container.location.requestLocation()
+        }
+        .onReceive(container.location.finalLocationPublisher) { newValue in
+            if let loc = newValue, viewModel.mosques.isEmpty && !viewModel.isLoading {
+                let region = MKCoordinateRegion(
+                    center: loc.coordinate,
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                )
+                position = .region(region)
+                lastSearchCoordinate = loc.coordinate
+                viewModel.fetchNearbyMosques(near: loc)
+            }
+        }
+    }
+    
+    private func searchInCurrentArea() {
+        if let region = currentMapRegion {
+            viewModel.fetchNearbyMosques(in: region)
+            lastSearchCoordinate = region.center
+            withAnimation {
+                hasMoved = false
+            }
+        }
+    }
+    
     private var mapView: some View {
         Map(position: $position, selection: $selectedMosque) {
             UserAnnotation()
@@ -101,6 +141,23 @@ struct NearbyMosquesView: View {
                             .foregroundColor(.themePrimary)
                             .background(Circle().fill(Color.white))
                             .shadow(radius: 3)
+                    }
+                }
+            }
+        }
+        .onMapCameraChange(frequency: .continuous) { context in
+            // Şu anki bölgeyi kaydet
+            self.currentMapRegion = context.region
+            
+            // Kullanıcı haritayı hareket ettirdiğinde butonu göster
+            if let last = lastSearchCoordinate {
+                let distance = CLLocation(latitude: last.latitude, longitude: last.longitude)
+                    .distance(from: CLLocation(latitude: context.region.center.latitude, longitude: context.region.center.longitude))
+                
+                // 500 metreden fazla hareket edildiyse butonu göster
+                if distance > 500 {
+                    withAnimation {
+                        hasMoved = true
                     }
                 }
             }

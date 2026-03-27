@@ -84,8 +84,10 @@ class HomeViewModel: ObservableObject {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(locationName) { [weak self] placemarks, _ in
             if let coordinate = placemarks?.first?.location?.coordinate {
-                self?.savedLatitude = coordinate.latitude
-                self?.savedLongitude = coordinate.longitude
+                Task { @MainActor in
+                    self?.savedLatitude = coordinate.latitude
+                    self?.savedLongitude = coordinate.longitude
+                }
             }
         }
         

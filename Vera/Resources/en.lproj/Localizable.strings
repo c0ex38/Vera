@@ -157,6 +157,7 @@
 "mosques_not_found" = "No mosques found nearby.";
 "mosques_get_directions" = "Get Directions (Apple Maps)";
 "mosques_unknown" = "Unknown Mosque";
+"mosques_search_query" = "Mosque";
 
 // MARK: - Quran
 "quran_title" = "Holy Quran";

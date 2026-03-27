@@ -31,12 +31,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate, Lo
     var locationPublisher: AnyPublisher<CLLocation?, Never> { $location.eraseToAnyPublisher() }
     
     var finalLocationPublisher: AnyPublisher<CLLocation?, Never> {
-        NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
-            .map { _ in () }
-            .prepend(())
-            .combineLatest($location)
-            .map { [weak self] _ in self?.finalLocation }
-            .eraseToAnyPublisher()
+        // Otomatik konum, manuel koordinat veya ana ayar değiştiğinde tetiklenir
+        Publishers.Merge3(
+            $location.map { _ in () },
+            NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification).map { _ in () },
+            Just(()).eraseToAnyPublisher()
+        )
+        .receive(on: RunLoop.main)
+        .map { [weak self] _ in self?.finalLocation }
+        .removeDuplicates()
+        .eraseToAnyPublisher()
     }
     
     var mapItemPublisher: AnyPublisher<MKMapItem?, Never> { $mapItem.eraseToAnyPublisher() }

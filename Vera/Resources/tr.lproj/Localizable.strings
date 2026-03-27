@@ -167,6 +167,7 @@
 "mosques_not_found" = "Çevrenizde cami bulunamadı.";
 "mosques_get_directions" = "Yol Tarifi Al (Apple Maps)";
 "mosques_unknown" = "Bilinmeyen Cami";
+"mosques_search_query" = "Cami";
 "imsakiye_tarih" = "Tarih";
 
 // MARK: - Quran

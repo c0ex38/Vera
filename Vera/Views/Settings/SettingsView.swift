@@ -56,25 +56,13 @@ struct SettingsView: View {
                 */
 
                 Section(header: Text(L10n.Settings.general).foregroundColor(.themePrimary)) {
-                    Toggle(L10n.Settings.notifications, isOn: $viewModel.notificationsEnabled)
-                        .tint(.themePrimary)
-                        .onChange(of: viewModel.notificationsEnabled) { _, isEnabled in
-                            if isEnabled {
-                                Task {
-                                    let granted = await NotificationManager.shared.requestAuthorization()
-                                    if !granted {
-                                        DispatchQueue.main.async {
-                                            viewModel.notificationsEnabled = false
-                                        }
-                                    }
-                                }
-                            } else {
-                                NotificationManager.shared.cancelAllNotifications()
-                            }
-                        }
+                    NavigationLink(destination: NotificationSettingsView()) {
+                        Label(L10n.Settings.notifications, systemImage: "bell.badge.fill")
+                    }
                     
-                    Toggle(L10n.Settings.autoLocation, isOn: $viewModel.autoLocationEnabled)
-                        .tint(.themePrimary)
+                    NavigationLink(destination: LocationSettingsView()) {
+                        Label(L10n.Settings.autoLocation, systemImage: "location.circle.fill")
+                    }
                 }
                 .listRowBackground(Color.themeSurface)
                 

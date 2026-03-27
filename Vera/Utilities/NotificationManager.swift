@@ -142,6 +142,33 @@ final class NotificationManager: ObservableObject, @unchecked Sendable, Notifica
         print("\(futureTimes.count) günlük bildirimler başarıyla planlandı.")
     }
     
+    func scheduleTestNotification() {
+        guard notificationsEnabled else { return }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Vera Test Bildirimi"
+        content.body = "Bildirim sistemimiz başarıyla çalışıyor! 🌙"
+        
+        if adhanSoundEnabled {
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("ezan.wav"))
+        } else {
+            content.sound = .default
+        }
+        
+        addBrandingAttachment(to: content)
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "test_notification_\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Test bildirimi hatası: \(error.localizedDescription)")
+            } else {
+                print("Test bildirimi 5 saniye sonrasına planlandı.")
+            }
+        }
+    }
+    
     func refreshCurrentSchedule() {
         let savedDistrictID = UserDefaults.standard.string(forKey: "savedDistrictID") ?? ""
         guard !savedDistrictID.isEmpty else { return }

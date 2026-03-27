@@ -12,7 +12,6 @@ struct HomeView: View {
     @State private var showPicker = false
     @State private var showImsakiye = false
     @State private var animateOrbs = false
-    @State private var currentSuggestion: HomeSuggestion?
     
     // Sistem uykudan uyanma takibi
     @Environment(\.scenePhase) var scenePhase
@@ -94,9 +93,7 @@ struct HomeView: View {
                                 }
                             }
                             
-                            if let suggestion = currentSuggestion {
-                                DiscoveryCard(suggestion: suggestion)
-                            }
+                            DiscoverySection()
                             
                         }
                         .padding(.top, 10)
@@ -141,9 +138,6 @@ struct HomeView: View {
                 MonthlyImsakiyeView()
             }
             .onAppear {
-                if currentSuggestion == nil {
-                    currentSuggestion = HomeSuggestion.random()
-                }
                 
                 if !savedDistrictID.isEmpty && viewModel.prayerTimes.isEmpty {
                     viewModel.fetchSavedLocationTimes(districtID: savedDistrictID, locationName: savedLocationName)
