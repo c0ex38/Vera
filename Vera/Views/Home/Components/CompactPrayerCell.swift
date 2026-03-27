@@ -8,11 +8,11 @@ struct CompactPrayerCell: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(title)
-                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 16 : 14, weight: .medium, design: .rounded))
                 .foregroundColor(isActive ? .white.opacity(0.9) : .themeTextSecondary)
             
             Text(time)
-                .font(.system(size: 18, weight: .heavy, design: .rounded))
+                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .heavy, design: .rounded))
                 .foregroundColor(isActive ? .white : .themePrimary)
         }
         .frame(maxWidth: .infinity)

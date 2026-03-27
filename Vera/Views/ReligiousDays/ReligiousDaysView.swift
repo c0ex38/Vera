@@ -92,14 +92,14 @@ struct ReligiousTimelineCell: View {
                         let parts = day.miladiDate.split(separator: " ")
                         if parts.count >= 3 {
                             Text(parts[0]) // Örn "15"
-                                .font(.system(size: 26, weight: .black, design: .rounded))
+                                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 26, weight: .black, design: .rounded))
                                 .foregroundColor(day.isImportant ? .white : .themePrimary)
                             Text(parts[1].prefix(3).uppercased()) // Örn "OCA"
-                                .font(.system(size: 11, weight: .bold))
+                                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 15 : 11, weight: .bold))
                                 .foregroundColor(day.isImportant ? .white.opacity(0.9) : .themeTextSecondary)
                         }
                     }
-                    .frame(width: 68, height: 72)
+                    .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 90 : 68, height: UIDevice.current.userInterfaceIdiom == .pad ? 95 : 72)
                     .background(
                         ZStack {
                             if day.isImportant {
@@ -119,7 +119,7 @@ struct ReligiousTimelineCell: View {
                     // Detaylar
                     VStack(alignment: .leading, spacing: 8) {
                         Text(day.name)
-                            .font(.system(size: day.isImportant ? 18 : 17, weight: day.isImportant ? .bold : .semibold))
+                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? (day.isImportant ? 24 : 22) : (day.isImportant ? 18 : 17), weight: day.isImportant ? .bold : .semibold))
                             .foregroundColor(day.isImportant ? .themeText : .themeTextSecondary)
                         
                         // Alt Detay Satırı
@@ -140,7 +140,7 @@ struct ReligiousTimelineCell: View {
                                 Text(day.dayOfWeek)
                             }
                         }
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12, weight: .medium))
                         .foregroundColor(.themeTextSecondary)
                     }
                 }

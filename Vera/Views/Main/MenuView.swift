@@ -159,6 +159,7 @@ struct MenuView: View {
             }
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(.stack)
     }
 }
 

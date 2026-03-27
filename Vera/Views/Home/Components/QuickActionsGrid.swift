@@ -9,32 +9,47 @@ struct QuickActionsGrid: View {
                 .padding(.horizontal, 20)
                 .padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 20 : 0)
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    NavigationLink(destination: QiblaView()) {
-                        QuickActionCell(title: "Kıble", icon: "safari.fill", color: Color.teal)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    NavigationLink(destination: DhikrView()) {
-                        QuickActionCell(title: "Zikirmatik", icon: "hand.tap.fill", color: Color.orange)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    NavigationLink(destination: QuranIndexView()) {
-                        QuickActionCell(title: "Kuran", icon: "book.pages.fill", color: Color.themePrimary)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    NavigationLink(destination: PrayerSurahsListView()) {
-                        QuickActionCell(title: "Dualar", icon: "hands.sparkles.fill", color: Color.indigo)
-                    }
-                    .buttonStyle(PlainButtonStyle())
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                HStack(spacing: 32) {
+                    Spacer()
+                    actions
+                    Spacer()
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 10)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        actions
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
+                }
             }
         }
+    }
+    
+    @ViewBuilder
+    private var actions: some View {
+        NavigationLink(destination: QiblaView()) {
+            QuickActionCell(title: "Kıble", icon: "safari.fill", color: Color.teal)
+        }
+        .buttonStyle(PlainButtonStyle())
+        
+        NavigationLink(destination: DhikrView()) {
+            QuickActionCell(title: "Zikirmatik", icon: "hand.tap.fill", color: Color.orange)
+        }
+        .buttonStyle(PlainButtonStyle())
+        
+        NavigationLink(destination: QuranIndexView()) {
+            QuickActionCell(title: "Kuran", icon: "book.pages.fill", color: Color.themePrimary)
+        }
+        .buttonStyle(PlainButtonStyle())
+        
+        NavigationLink(destination: PrayerSurahsListView()) {
+            QuickActionCell(title: "Dualar", icon: "hands.sparkles.fill", color: Color.indigo)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

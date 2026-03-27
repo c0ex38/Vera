@@ -123,6 +123,13 @@ class HomeViewModel: ObservableObject {
     }
     
     private func matchLocationWithAPI(mapItem: MKMapItem) {
+        // Eğer zaten bir lokasyonumuz varsa ve vakitler yüklüyse, tablar arası geçişte tekrar tetiklemeyelim.
+        // Sadece uygulama ilk açıldığında veya manuel yenileme istendiğinde çalışmalı.
+        if !prayerTimes.isEmpty && state == .success {
+            print("DEBUG: Skipping redundant location match (already success)")
+            return
+        }
+        
         state = .matchingAPI
         
         let placemark = mapItem.placemark
@@ -177,7 +184,13 @@ class HomeViewModel: ObservableObject {
                 notificationManager.scheduleWeekly(times: times)
                 
             } catch {
-                self.state = .error("API Hatası: \(error.localizedDescription)")
+                // Eğer zaten vakitlerimiz varsa, bir API hatası durumunda success state'ini bozmayalım (sessiz hata)
+                if !prayerTimes.isEmpty {
+                    print("DEBUG API SILENT ERROR: \(error.localizedDescription)")
+                    self.state = .success 
+                } else {
+                    self.state = .error("API Hatası: \(error.localizedDescription)")
+                }
             }
         }
     }

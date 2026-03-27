@@ -221,6 +221,7 @@ struct DhikrView: View {
                     }
                 }
             }
+            .navigationViewStyle(.stack)
             .presentationDetents([.medium, .large])
         }
     }

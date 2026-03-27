@@ -128,6 +128,7 @@ struct HomeView: View {
                 NavigationView {
                     SettingsView()
                 }
+                .navigationViewStyle(.stack)
             }
             .sheet(isPresented: $showPicker, onDismiss: {
                 if !savedDistrictID.isEmpty {
@@ -161,6 +162,7 @@ struct HomeView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     // MARK: - Subviews
@@ -212,7 +214,7 @@ struct HomeView: View {
     }
     
     private var timesGrid: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 14), count: 3), spacing: 14) {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 14), count: UIDevice.current.userInterfaceIdiom == .pad ? 6 : 3), spacing: 14) {
             if let today = viewModel.todayPrayerTime {
                 CompactPrayerCell(title: L10n.Prayer.imsak, time: today.imsakTime, isActive: countdownManager.nextPrayerName == "İmsak")
                 CompactPrayerCell(title: L10n.Prayer.sunrise, time: today.sunrise, isActive: countdownManager.nextPrayerName == "Güneş")

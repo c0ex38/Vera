@@ -79,7 +79,7 @@ struct MonthlyImsakiyeView: View {
                     // Şık Tablo Sütun Başlıkları
                     HStack(spacing: 0) {
                         Text(NSLocalizedString("imsakiye_tarih", comment: "").uppercased())
-                            .frame(width: 70, alignment: .leading)
+                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70, alignment: .leading)
                         
                         Divider().background(Color.themeTextSecondary.opacity(0.3)).frame(height: 12).padding(.horizontal, 4)
                         
@@ -104,7 +104,7 @@ struct MonthlyImsakiyeView: View {
                     ScrollView(showsIndicators: false) {
                         ScrollViewReader { proxy in
                             LazyVStack(spacing: 0) {
-                                ForEach(Array(viewModel.prayerTimes.enumerated()), id: \.element.gregorianDateShort) { index, day in
+                                ForEach(Array(filteredPrayerTimes.enumerated()), id: \.element.gregorianDateShort) { index, day in
                                     ImsakiyeRow(day: day, isEven: index % 2 == 0)
                                         .id(day.gregorianDateShort)
                                 }
@@ -116,7 +116,7 @@ struct MonthlyImsakiyeView: View {
                                 formatter.dateFormat = "yyyy-MM-dd"
                                 let todayString = formatter.string(from: Date())
                                 
-                                if let todayModel = viewModel.prayerTimes.first(where: { $0.gregorianDateShortIso8601.starts(with: todayString) }) {
+                                if let todayModel = filteredPrayerTimes.first(where: { $0.gregorianDateShortIso8601.starts(with: todayString) }) {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                         withAnimation(.easeInOut(duration: 0.8)) {
                                             proxy.scrollTo(todayModel.gregorianDateShort, anchor: .center)
@@ -142,6 +142,27 @@ struct MonthlyImsakiyeView: View {
             }
         }) {
             LocationPickerView()
+        }
+    }
+    
+    // MARK: - Filtreleme Mantığı (Max 7 Gün Geçmiş)
+    private var filteredPrayerTimes: [PrayerTime] {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        // En fazla 7 gün geriye git (Örn: Bugün 27 Mart ise 20 Mart ve sonrası)
+        guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: today) else {
+            return viewModel.prayerTimes
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return viewModel.prayerTimes.filter { item in
+            let dateString = String(item.gregorianDateShortIso8601.prefix(10))
+            if let date = formatter.date(from: dateString) {
+                return date >= sevenDaysAgo
+            }
+            return true
         }
     }
 }
@@ -187,15 +208,20 @@ struct ImsakiyeRow: View {
                         .foregroundColor(isToday ? .white.opacity(0.8) : .themeTextSecondary)
                 }
                 
-                // Gün kısaltması: "Pzt", "Sal" vs.
+                // Gün kısaltması: "Pzt", "Sal" vs. (Year'ı "202" olarak gösteren hatayı düzeltmek için parts[3] kullanıyoruz)
                 let parts = day.gregorianDateLong?.split(separator: " ")
-                if let parts = parts, parts.count > 2 {
+                if let parts = parts, parts.count > 3 {
+                    Text(String(parts[3].prefix(12))) // "Pazartesi" gibi tam ismi de sığabilir iPad'de
+                        .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 14 : 10, weight: .medium))
+                        .foregroundColor(isToday ? .white.opacity(0.8) : .themePrimary)
+                } else if let parts = parts, parts.count > 2 {
+                    // Eğer 3 parça varsa ve sonuncusu gün ise (eski format uyumu için)
                     Text(String(parts[2].prefix(3)))
-                        .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 16 : 11, weight: .medium))
+                        .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 14 : 10, weight: .medium))
                         .foregroundColor(isToday ? .white.opacity(0.8) : .themePrimary)
                 }
             }
-            .frame(width: 70, alignment: .leading)
+            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70, alignment: .leading)
             
             Divider()
                 .background(isToday ? Color.white.opacity(0.3) : Color.themeTextSecondary.opacity(0.2))

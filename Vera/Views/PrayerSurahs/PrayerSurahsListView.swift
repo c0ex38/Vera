@@ -27,21 +27,39 @@ struct PrayerSurahsListView: View {
                 .padding(.bottom, 10)
                 
                 ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 16) {
-                        ForEach(Array(viewModel.surahs.enumerated()), id: \.element.id) { index, surah in
-                            NavigationLink(destination: SurahDetailView(surah: surah)) {
-                                SurahPremiumRowView(surah: surah, index: index + 1)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+                    let columns = [
+                        GridItem(.flexible(), spacing: 16),
+                        GridItem(.flexible(), spacing: 16)
+                    ]
+                    
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        LazyVGrid(columns: columns, spacing: 16) {
+                            surahListRows
                         }
+                        .padding(.horizontal, 24)
+                        .padding(.top, 10)
+                        .padding(.bottom, 120)
+                    } else {
+                        LazyVStack(spacing: 16) {
+                            surahListRows
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 10)
+                        .padding(.bottom, 120)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 10)
-                    .padding(.bottom, 120) // Custom TabBar padding
                 }
             }
         }
         .navigationBarHidden(true)
+    }
+    
+    private var surahListRows: some View {
+        ForEach(Array(viewModel.surahs.enumerated()), id: \.element.id) { index, surah in
+            NavigationLink(destination: SurahDetailView(surah: surah)) {
+                SurahPremiumRowView(surah: surah, index: index + 1)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
     }
 }
 

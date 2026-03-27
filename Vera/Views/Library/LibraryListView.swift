@@ -9,11 +9,13 @@ struct LibraryListView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Header (Zaten NavigationView başlığı var ama özel bir giriş ekleyebiliriz)
                 Text("İlmihal ve Dini Bilgiler")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 24, weight: .bold, design: .rounded))
                     .foregroundColor(.themeText)
                     .padding(.horizontal, 20)
                 
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
+                let columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: UIDevice.current.userInterfaceIdiom == .pad ? 3 : 2)
+                
+                LazyVGrid(columns: columns, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16) {
                     ForEach(categories) { category in
                         NavigationLink(destination: LibraryCategoryDetailView(category: category)) {
                             categoryCard(category: category)

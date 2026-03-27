@@ -226,6 +226,14 @@
 			<key>SKAdNetworkIdentifier</key>
 			<string>2u9pt9hc89.skadnetwork</string>
 		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>4w7y6s5ca2.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>krvm5ba6qw.skadnetwork</string>
+		</dict>
 	</array>
 
 	<key>ITSAppUsesNonExemptEncryption</key>

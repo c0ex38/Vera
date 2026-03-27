@@ -5,7 +5,12 @@ struct EsmaulHusnaListView: View {
     @Environment(\.presentationMode) var presentationMode
     
     // Grid Setup
-    let columns = [
+    @State private var columns = UIDevice.current.userInterfaceIdiom == .pad ? [
+        GridItem(.flexible(), spacing: 20),
+        GridItem(.flexible(), spacing: 20),
+        GridItem(.flexible(), spacing: 20),
+        GridItem(.flexible(), spacing: 20)
+    ] : [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
@@ -61,7 +66,7 @@ struct EsmaulHusnaGridCard: View {
             // Üst Kısım: Sıra Numarası ve İnce Ayrım
             HStack {
                 Text("\(esma.order)")
-                    .font(.system(size: 14, weight: .black, design: .rounded))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .black, design: .rounded))
                     .foregroundColor(.themePrimary)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -75,7 +80,7 @@ struct EsmaulHusnaGridCard: View {
             
             // Orta Kısım: Arapça Hat
             Text(esma.arabic)
-                .font(.system(size: 34, weight: .medium, design: .serif))
+                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 34, weight: .medium, design: .serif))
                 .foregroundColor(.themePrimary) // Altın rengi veya ana tema
                 .shadow(color: Color.themePrimary.opacity(0.4), radius: 8, y: 4)
                 .multilineTextAlignment(.center)
@@ -84,17 +89,17 @@ struct EsmaulHusnaGridCard: View {
             // Alt Kısım: Okunuş ve Kısa Anlam
             VStack(spacing: 4) {
                 Text(esma.turkishReading)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 15, weight: .bold, design: .rounded))
                     .foregroundColor(.themeText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                 
                 Text(esma.meaningText)
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 15 : 11, weight: .medium, design: .rounded))
                     .foregroundColor(.themeTextSecondary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .frame(height: 28) // Uzun/kısa metinlerin zıplamasını önlemek için
+                    .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 28) // Uzun/kısa metinlerin zıplamasını önlemek için
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 16)

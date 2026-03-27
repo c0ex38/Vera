@@ -7,7 +7,7 @@ class SubscriptionManager: ObservableObject, SubscriptionProvider {
     static let shared = SubscriptionManager()
     
     @Published private(set) var products: [Product] = []
-    @Published private(set) var isPro: Bool = true // TEMPORARY: SET TO TRUE FOR SCREENSHOTS
+    @Published private(set) var isPro: Bool = false// TEMPORARY: SET TO TRUE FOR SCREENSHOTS
     
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var fetchError: String? = nil

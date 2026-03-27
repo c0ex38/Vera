@@ -158,12 +158,12 @@ struct QuranSinglePageView: View {
                                     HStack {
                                         Spacer()
                                         Text(surahTitle)
-                                            .font(.system(size: 26, weight: .heavy, design: .serif))
+                                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 36 : 26, weight: .heavy, design: .serif))
                                             .foregroundColor(.themePrimary)
                                             .kerning(2)
                                         Spacer()
                                     }
-                                    .padding(.vertical, 20)
+                                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
                                     .background(
                                         Image(systemName: "seal.fill") // Motif havası vermek için
                                             .resizable()
@@ -190,12 +190,12 @@ struct QuranSinglePageView: View {
                                         ZStack {
                                             Circle()
                                                 .fill(Color.themePrimary.opacity(0.08))
-                                                .frame(width: 32, height: 32)
+                                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 32, height: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 32)
                                             Circle()
                                                 .strokeBorder(Color.themePrimary.opacity(0.3), lineWidth: 1)
-                                                .frame(width: 32, height: 32)
+                                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 32, height: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 32)
                                             Text("\(verse.verseNumberInSurah)")
-                                                .font(.system(size: 13, weight: .heavy))
+                                                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 13, weight: .heavy))
                                                 .foregroundColor(.themePrimary)
                                         }
                                         .padding(.top, 6)
@@ -206,17 +206,17 @@ struct QuranSinglePageView: View {
                                         if !verse.text.isEmpty {
                                             Text(verse.text)
                                                 // Sistem varsayılan serif fontu ile Kurani hava verilir
-                                                .font(.system(size: 32, weight: .medium, design: .serif))
+                                                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 32, weight: .medium, design: .serif))
                                                 .multilineTextAlignment(.trailing)
                                                 .foregroundColor(.themeText)
-                                                .lineSpacing(18)
+                                                .lineSpacing(UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18)
                                         }
                                     }
                                     
                                     // Okunuşu (Transliteration - İtalik ve Premium Yeşil)
                                     if !verse.transcription.isEmpty {
                                         Text(verse.transcription)
-                                            .font(.system(size: 15, weight: .medium, design: .serif))
+                                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 15, weight: .medium, design: .serif))
                                             .italic()
                                             .foregroundColor(.themePrimary.opacity(0.9))
                                             .multilineTextAlignment(.leading)
@@ -228,7 +228,7 @@ struct QuranSinglePageView: View {
                                     // Türkçe Çevirisi (Meali - Koyu Gri/Siyah, Okunaklı)
                                     if !verse.translation.isEmpty {
                                         Text(verse.translation)
-                                            .font(.system(size: 16, weight: .regular))
+                                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 22 : 16, weight: .regular))
                                             .foregroundColor(.themeTextSecondary)
                                             .multilineTextAlignment(.leading)
                                             .lineSpacing(8)

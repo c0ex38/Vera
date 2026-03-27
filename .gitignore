@@ -1,2 +1,4 @@
 Config.xcconfig
 configure_env.rb
+
+.DS_Store
