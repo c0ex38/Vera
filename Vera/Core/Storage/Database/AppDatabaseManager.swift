@@ -13,8 +13,8 @@ actor AppDatabaseManager: DatabaseProvider {
     /// Internal function to safely open the SQLite database.
     private static func openDatabaseConnection() -> OpaquePointer? {
         let fileManager = FileManager.default
-        let currentDBVersion = 11 // Increase this to force a database refresh for all users
-        let dbVersionKey = "VeraDatabaseVersion_Refactor"
+        let currentDBVersion = 14 // Increase this to force a database refresh for all users
+        let dbVersionKey = "VeraDatabaseVersion_LibrarySteps"
         let savedVersion = UserDefaults.standard.integer(forKey: dbVersionKey)
         
         guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }

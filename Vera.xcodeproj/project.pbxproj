@@ -11,7 +11,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		42DF1E1B017C57C3FF01B838 /* vera.sqlite */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = vera.sqlite; path = Vera/Resources/Data/vera.sqlite; sourceTree = "<group>"; };
 		50572A642F71967E002A23DD /* Vera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B61A5AF635F2765B27491C7 /* Config.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Vera/Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,8 +54,8 @@
 			children = (
 				50572A662F71967E002A23DD /* Vera */,
 				50572A652F71967E002A23DD /* Products */,
-				42DF1E1B017C57C3FF01B838 /* vera.sqlite */,
 				7B61A5AF635F2765B27491C7 /* Config.xcconfig */,
+				5072B4652F79638400BE3CE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +65,13 @@
 				50572A642F71967E002A23DD /* Vera.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5072B4652F79638400BE3CE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,23 +164,25 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vera/Vera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5QB9F8B9JZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vera/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Namaz vakitlerini bulunduğunuz konuma göre otomatik göstermek için konum izninize ihtiyacımız var.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozay.Vera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -197,23 +205,25 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vera/Vera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5QB9F8B9JZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vera/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Namaz vakitlerini bulunduğunuz konuma göre otomatik göstermek için konum izninize ihtiyacımız var.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cozay.Vera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
