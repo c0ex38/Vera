@@ -5,12 +5,10 @@ import GoogleMobileAds
 
 @main
 struct VeraApp: App {
-    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
-    @AppStorage("appTheme") private var appTheme: Int = 0 // 0: System, 1: Light, 2: Dark
-    
     @StateObject private var container: DependencyContainer
     @StateObject private var homeViewModel: HomeViewModel
     @StateObject private var adManager = AppOpenAdManager.shared
+    @ObservedObject private var preferences = PreferenceManager.shared
     @Environment(\.scenePhase) private var scenePhase
     
     init() {
@@ -30,7 +28,7 @@ struct VeraApp: App {
         #endif
         
         #if DEBUG
-        print("🚀 Vera Debug Mode Started")
+        DebugLog.log("Vera Debug Mode Started")
         #endif
     }
     
@@ -39,7 +37,7 @@ struct VeraApp: App {
             Group {
                 if !adManager.isSplashFinished {
                     SplashView()
-                } else if hasCompletedOnboarding {
+                } else if preferences.hasCompletedOnboarding {
                     MainTabView()
                 } else {
                     OnboardingView()
@@ -47,7 +45,7 @@ struct VeraApp: App {
             }
             .environmentObject(homeViewModel)
             .environmentObject(container)
-            .preferredColorScheme(appTheme == 1 ? ColorScheme.light : (appTheme == 2 ? ColorScheme.dark : nil))
+            .preferredColorScheme(preferences.appTheme == 1 ? ColorScheme.light : (preferences.appTheme == 2 ? ColorScheme.dark : nil))
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {

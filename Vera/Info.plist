@@ -2,22 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Namaz vakitlerini bulunduğunuz konuma göre otomatik göstermek için konum izninize ihtiyacımız var.</string>
-	<key>GADApplicationIdentifier</key>
-	<string>$(ADMOB_APP_ID)</string>
-	<key>AdMobBannerID</key>
-	<string>$(ADMOB_BANNER_ID)</string>
 	<key>AdMobAppOpenID</key>
 	<string>$(ADMOB_APP_OPEN_ID)</string>
+	<key>AdMobBannerID</key>
+	<string>$(ADMOB_BANNER_ID)</string>
 	<key>AdMobInterstitialID</key>
 	<string>$(ADMOB_INTERSTITIAL_ID)</string>
 	<key>ApiBaseUrl</key>
 	<string>$(API_BASE_URL)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>$(ADMOB_APP_ID)</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -237,8 +231,9 @@
 			<string>krvm5ba6qw.skadnetwork</string>
 		</dict>
 	</array>
-
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
