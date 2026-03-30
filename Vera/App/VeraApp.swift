@@ -23,8 +23,15 @@ struct VeraApp: App {
         // Google Ads Başlatma ve İçerik Filtreleme
         #if canImport(GoogleMobileAds)
         // Dini uygulamalar için maksimum içerik seviyesini (G: Genel İzleyici) olarak kısıtlama
-        MobileAds.shared.requestConfiguration.maxAdContentRating = GADMaxAdContentRating.general
-        MobileAds.shared.start(completionHandler: nil)
+        let adConfig = MobileAds.shared.requestConfiguration
+        adConfig.maxAdContentRating = GADMaxAdContentRating.general
+        
+        MobileAds.shared.start { _ in
+            // Reklam SDK'sı hazır olduğunda banner önyüklemesini başlat
+            Task { @MainActor in
+                BannerAdManager.shared.preloadAd(adUnitID: AppEnvironment.shared.admobBannerID)
+            }
+        }
         #endif
         
         #if DEBUG

@@ -13,9 +13,33 @@ struct AdBannerView: UIViewRepresentable {
         let container = UIView()
         
         #if canImport(GoogleMobileAds)
-        // Set up the AdMob Banner using modernized SPM types
-        let bannerView = context.coordinator.bannerView
-        bannerView.adUnitID = adUnitID
+        // Check for preloaded banner first
+        let bannerView: BannerView
+        if let preloaded = BannerAdManager.shared.getPreloadedBanner() {
+            bannerView = preloaded
+            DebugLog.success("AdMob: Reusing preloaded banner.")
+        } else {
+            // Fallback: Create and load normally
+            bannerView = context.coordinator.bannerView
+            bannerView.adUnitID = adUnitID
+            
+            // Calculate Large Adaptive Size (Modern Swift API)
+            let allScenes = UIApplication.shared.connectedScenes
+            let windowScene = (allScenes.first { $0.activationState == .foregroundActive } ?? allScenes.first) as? UIWindowScene
+            if let windowScene = windowScene {
+                let adWidth = windowScene.screen.bounds.width
+                if adWidth > 0 {
+                    bannerView.adSize = largeAnchoredAdaptiveBanner(width: adWidth)
+                }
+            }
+            
+            let request = Request()
+            let extras = Extras()
+            extras.additionalParameters = ["npa": "1"]
+            request.register(extras)
+            bannerView.load(request)
+            DebugLog.log("AdMob: Loading on-demand banner (no preload found).")
+        }
         
         // Find the correct WindowScene and RootViewController regardless of activation state during app launch
         let allScenes = UIApplication.shared.connectedScenes
@@ -25,26 +49,13 @@ struct AdBannerView: UIViewRepresentable {
            let window = windowScene.windows.first(where: { $0.isKeyWindow }) ?? windowScene.windows.first
            if let rootVC = window?.rootViewController {
                bannerView.rootViewController = rootVC
-               
-               // Calculate Large Adaptive Size (Modern Swift API)
-               let adWidth = windowScene.screen.bounds.width
-               if adWidth > 0 {
-                   bannerView.adSize = largeAnchoredAdaptiveBanner(width: adWidth)
-               }
            }
         }
         
-        // Final fallback if adSize was never set
+        // Final fallback if adSize was never set (only for fresh loads)
         if bannerView.adSize.size.width == 0 {
-            // Ultimate safety fallback to a standard iPhone SE width
             bannerView.adSize = largeAnchoredAdaptiveBanner(width: 320)
         }
-        
-        let request = Request()
-        let extras = Extras()
-        extras.additionalParameters = ["npa": "1"]
-        request.register(extras)
-        bannerView.load(request)
         
         // Add to container and center
         container.addSubview(bannerView)
