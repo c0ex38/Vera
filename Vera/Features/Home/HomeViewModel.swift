@@ -6,10 +6,10 @@ import MapKit
 
 @MainActor
 class HomeViewModel: ObservableObject {
-    @Published var state: ViewState = .idle
+    @Published private(set) var state: ViewState = .idle
     @Published var prayerTimes: [PrayerTime] = []
     @Published var resolvedLocationName: String = ""
-    @Published var hadithOfTheDay: Hadith? = nil
+    @Published private(set) var hadithOfTheDay: Hadith? = nil
     
     // Centralized preferences
     private let preferences = PreferenceManager.shared
@@ -69,7 +69,7 @@ class HomeViewModel: ObservableObject {
     }
 
     func fetchSavedLocationTimes(districtID: String, locationName: String) {
-        state = .requestingLocation
+        self.state = .requestingLocation
         self.resolvedLocationName = locationName
         
         let geocoder = CLGeocoder()

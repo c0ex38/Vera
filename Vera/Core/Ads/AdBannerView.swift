@@ -9,71 +9,61 @@ struct AdBannerView: UIViewRepresentable {
     /// The AdMob Ad Unit ID.
     let adUnitID: String
     
+    /// Whether to use the shared preloaded banner from BannerAdManager.
+    /// Typically true for the persistent bottom bar, false for on-demand page content.
+    var useSharedPreload: Bool = false
+    
     func makeUIView(context: Context) -> UIView {
         let container = UIView()
-        
-        #if canImport(GoogleMobileAds)
-        // Check for preloaded banner first
-        let bannerView: BannerView
-        if let preloaded = BannerAdManager.shared.getPreloadedBanner() {
-            bannerView = preloaded
-            DebugLog.success("AdMob: Reusing preloaded banner.")
-        } else {
-            // Fallback: Create and load normally
-            bannerView = context.coordinator.bannerView
-            bannerView.adUnitID = adUnitID
-            
-            // Calculate Large Adaptive Size (Modern Swift API)
-            let allScenes = UIApplication.shared.connectedScenes
-            let windowScene = (allScenes.first { $0.activationState == .foregroundActive } ?? allScenes.first) as? UIWindowScene
-            if let windowScene = windowScene {
-                let adWidth = windowScene.screen.bounds.width
-                if adWidth > 0 {
-                    bannerView.adSize = largeAnchoredAdaptiveBanner(width: adWidth)
-                }
-            }
-            
-            let request = Request()
-            let extras = Extras()
-            extras.additionalParameters = ["npa": "1"]
-            request.register(extras)
-            bannerView.load(request)
-            DebugLog.log("AdMob: Loading on-demand banner (no preload found).")
-        }
-        
-        // Find the correct WindowScene and RootViewController regardless of activation state during app launch
-        let allScenes = UIApplication.shared.connectedScenes
-        let windowScene = (allScenes.first { $0.activationState == .foregroundActive } ?? allScenes.first) as? UIWindowScene
-        
-        if let windowScene = windowScene {
-           let window = windowScene.windows.first(where: { $0.isKeyWindow }) ?? windowScene.windows.first
-           if let rootVC = window?.rootViewController {
-               bannerView.rootViewController = rootVC
-           }
-        }
-        
-        // Final fallback if adSize was never set (only for fresh loads)
-        if bannerView.adSize.size.width == 0 {
-            bannerView.adSize = largeAnchoredAdaptiveBanner(width: 320)
-        }
-        
-        // Add to container and center
-        container.addSubview(bannerView)
-        container.clipsToBounds = true
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        // Center the banner to prevent it from leaking upwards and overlapping the custom Tab Bar
-        NSLayoutConstraint.activate([
-            bannerView.topAnchor.constraint(equalTo: container.topAnchor),
-            bannerView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-            bannerView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            bannerView.trailingAnchor.constraint(equalTo: container.trailingAnchor)
-        ])
-        #endif
-        
+        container.backgroundColor = .clear
         return container
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {}
+    func updateUIView(_ uiView: UIView, context: Context) {
+        #if canImport(GoogleMobileAds)
+        // 1. Get the banner (preloaded preferred only if requested)
+        let bannerView: BannerView
+        if useSharedPreload, let preloaded = BannerAdManager.shared.getPreloadedBanner() {
+            bannerView = preloaded
+            if bannerView.superview != uiView {
+                DebugLog.success("AdMob: Attaching shared preloaded banner to a new view.")
+            }
+        } else {
+            bannerView = context.coordinator.bannerView
+            if bannerView.adUnitID == nil {
+                bannerView.adUnitID = adUnitID
+                bannerView.load(Request())
+                DebugLog.log("AdMob: Initializing on-demand banner (\(adUnitID)).")
+            }
+        }
+        
+        // 2. Ensure it's in the current container
+        if bannerView.superview != uiView {
+            // Remove from old parent if any
+            bannerView.removeFromSuperview()
+            uiView.addSubview(bannerView)
+            
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                bannerView.centerXAnchor.constraint(equalTo: uiView.centerXAnchor),
+                bannerView.centerYAnchor.constraint(equalTo: uiView.centerYAnchor),
+                bannerView.widthAnchor.constraint(equalTo: uiView.widthAnchor),
+                bannerView.heightAnchor.constraint(equalTo: uiView.heightAnchor)
+            ])
+        }
+        
+        // 3. Update RootViewController (Critical for clicks)
+        let allScenes = UIApplication.shared.connectedScenes
+        if let windowScene = (allScenes.first { $0.activationState == .foregroundActive } ?? allScenes.first) as? UIWindowScene {
+            let window = windowScene.windows.first(where: { $0.isKeyWindow }) ?? windowScene.windows.first
+            if let rootVC = window?.rootViewController {
+                if bannerView.rootViewController != rootVC {
+                    bannerView.rootViewController = rootVC
+                }
+            }
+        }
+        #endif
+    }
     
     func makeCoordinator() -> Coordinator {
         Coordinator()

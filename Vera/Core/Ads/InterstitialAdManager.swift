@@ -47,7 +47,12 @@ final class InterstitialAdManager: NSObject, ObservableObject {
         extras.additionalParameters = ["npa": "1"]
         request.register(extras)
         
+        #if DEBUG
+        // Official Google AdMob Test ID for Interstitial (iOS)
+        let adUnitID = "ca-app-pub-3940256099942544/4411468910"
+        #else
         let adUnitID = environmentProvider.admobInterstitialID
+        #endif
         
         InterstitialAd.load(
             with: adUnitID,

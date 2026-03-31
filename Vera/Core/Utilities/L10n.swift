@@ -55,6 +55,7 @@ enum L10n {
         static let back = NSLocalizedString("common_geri", comment: "")
         static let finish = NSLocalizedString("common_bitti", comment: "")
         static let km = NSLocalizedString("common_km", comment: "")
+        static let error = NSLocalizedString("common_hata", comment: "")
     }
     
     enum Settings {

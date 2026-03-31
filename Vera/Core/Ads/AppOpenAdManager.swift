@@ -58,8 +58,8 @@ final class AppOpenAdManager: NSObject, ObservableObject {
         isLoadingAd = true
         
         // Timeout Mechanizmi (En fazla 3 saniye bekle, gelmezse uygulamayı aç)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
-            guard let self = self else { return }
+        Task {
+            try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
             if !self.isShowingAd && self.appOpenAd == nil {
                 DebugLog.warning("App Open Ad zaman aşımına uğradı, uygulamaya devam ediliyor.")
                 self.hasShownAdThisLaunch = true
@@ -72,7 +72,12 @@ final class AppOpenAdManager: NSObject, ObservableObject {
         extras.additionalParameters = ["npa": "1"]
         request.register(extras)
         
+        #if DEBUG
+        // Official Google AdMob Test ID for App Open (iOS)
+        let adUnitID = "ca-app-pub-3940256099942544/5575463023"
+        #else
         let adUnitID = environmentProvider.admobAppOpenID
+        #endif
         
         AppOpenAd.load(
             with: adUnitID,

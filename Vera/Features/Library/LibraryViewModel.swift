@@ -7,19 +7,37 @@ class LibraryViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var searchText: String = ""
     
-    // Dependencies
+    // Filtered categories based on search (cached)
+    @Published var filteredCategories: [LibraryCategory] = []
+    
+    private var cancellables = Set<AnyCancellable>()
     private let database = AppDatabaseManager.shared
     
-    // Filtered categories based on search
-    var filteredCategories: [LibraryCategory] {
-        if searchText.isEmpty {
-            return categories
+    init() {
+        setupBindings()
+        loadData()
+    }
+    
+    private func setupBindings() {
+        // Automatically update filtered list when search text or categories change
+        Publishers.CombineLatest($searchText, $categories)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] searchText, categories in
+                self?.performFilter(text: searchText, in: categories)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func performFilter(text: String, in categories: [LibraryCategory]) {
+        if text.isEmpty {
+            self.filteredCategories = categories
+            return
         }
         
-        return categories.compactMap { category in
+        self.filteredCategories = categories.compactMap { category in
             let filteredItems = category.items.filter { 
-                $0.title.localizedCaseInsensitiveContains(searchText) || 
-                ($0.meaning?.localizedCaseInsensitiveContains(searchText) ?? false)
+                $0.title.localizedCaseInsensitiveContains(text) || 
+                ($0.meaning?.localizedCaseInsensitiveContains(text) ?? false)
             }
             
             if !filteredItems.isEmpty {
@@ -29,10 +47,6 @@ class LibraryViewModel: ObservableObject {
             }
             return nil
         }
-    }
-    
-    init() {
-        loadData()
     }
     
     func loadData() {
@@ -67,24 +81,27 @@ class LibraryViewModel: ObservableObject {
                 let unifiedCategory = LibraryCategory(
                     id: "unified_dualar",
                     name: "Dualar & Sureler",
-                    icon: "mosque.fill",
+                    icon: "building.columns.fill",
                     color: "#007AFF",
                     items: unifiedDualarItems
                 )
                 finalCategories.insert(unifiedCategory, at: 0)
             }
             
-            // 5. Ensure sorting: Dualar first, then Namaz Rehber, then others
+            // 5. Stable Priority-Based Sorting
+            let priorityMap: [String: Int] = [
+                "unified_dualar": 0,
+                "namaz_rehber": 1,
+                "dini_bilgiler": 2
+            ]
+            
             self.categories = finalCategories.sorted { cat1, cat2 in
-                if cat1.id == "unified_dualar" { return true }
-                if cat2.id == "unified_dualar" { return false }
+                let p1 = priorityMap[cat1.id] ?? 999
+                let p2 = priorityMap[cat2.id] ?? 999
                 
-                if cat1.id == "namaz_rehber" { return true }
-                if cat2.id == "namaz_rehber" { return false }
-                
-                if cat1.id == "dini_bilgiler" { return true }
-                if cat2.id == "dini_bilgiler" { return false }
-                
+                if p1 != p2 {
+                    return p1 < p2
+                }
                 return cat1.name < cat2.name
             }
             

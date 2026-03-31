@@ -8,16 +8,6 @@ struct DhikrView: View {
     @State private var showResetAlert = false
     @State private var showTesbihatSheet = false
     
-    let predefinedDhikrs = [
-        (L10n.Dhikr.subhanallah, 33),
-        (L10n.Dhikr.elhamdulillah, 33),
-        (L10n.Dhikr.allahuekber, 33),
-        (L10n.Dhikr.tevhidi, 99),
-        (L10n.Dhikr.salavat, 99),
-        (L10n.Dhikr.estagfirullah, 100),
-        (L10n.Dhikr.free, 0)
-    ]
-    
     var body: some View {
         ZStack {
             Color.themeBackground.ignoresSafeArea()
@@ -188,18 +178,20 @@ struct DhikrView: View {
         .sheet(isPresented: $showTesbihatSheet) {
             NavigationStack {
                 List {
-                    ForEach(predefinedDhikrs, id: \.0) { dhikr in
+                    ForEach(viewModel.templates) { template in
                         Button(action: {
-                            viewModel.loadTemplate(newTitle: dhikr.0, newTarget: dhikr.1)
+                            // Map the key to localized string and load template
+                            let localizedTitle = NSLocalizedString(template.titleKey, comment: "")
+                            viewModel.loadTemplate(newTitle: localizedTitle, newTarget: template.target)
                             showTesbihatSheet = false
                         }) {
                             HStack {
-                                Text(dhikr.0)
+                                Text(NSLocalizedString(template.titleKey, comment: ""))
                                     .font(.headline)
                                     .foregroundColor(.themeText)
                                 Spacer()
-                                if dhikr.1 > 0 {
-                                    Text("\(dhikr.1)")
+                                if template.target > 0 {
+                                    Text("\(template.target)")
                                         .font(.subheadline)
                                         .foregroundColor(.themeTextSecondary)
                                         .padding(.horizontal, 10)

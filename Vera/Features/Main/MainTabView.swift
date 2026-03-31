@@ -62,7 +62,7 @@ struct MainTabView: View {
                 // 2. Reklam Katmanı (Herkese açık)
                 ZStack {
                     #if canImport(GoogleMobileAds)
-                    AdBannerView(adUnitID: container.environment.admobBannerID)
+                    AdBannerView(adUnitID: container.environment.admobBannerID, useSharedPreload: true)
                         .frame(height: 60)
                         .clipped()
                     #else

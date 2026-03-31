@@ -157,7 +157,7 @@ struct MenuView: View {
         case .zakat:
             ZakatHomeView()
         case .library:
-            PrayerSurahsListView()
+            LibraryListView()
         case .hadiths:
             HadithListView()
         case .sermon:

@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import Foundation
 #if canImport(GoogleMobileAds)
 import GoogleMobileAds
@@ -35,7 +36,7 @@ final class BannerAdManager: NSObject, ObservableObject {
         
         // Use a default responsive size for preloading
         let screenWidth = UIScreen.main.bounds.width
-        bannerView.adSize = GADInlineAdaptiveBannerAdSizeWithWidthAndMaxHeight(screenWidth, 60)
+        bannerView.adSize = inlineAdaptiveBanner(width: screenWidth, maxHeight: 60)
         
         let request = Request()
         let extras = Extras()

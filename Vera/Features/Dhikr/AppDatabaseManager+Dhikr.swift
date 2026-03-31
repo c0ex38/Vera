@@ -4,7 +4,7 @@ import SQLite3
 extension AppDatabaseManager {
     
     // MARK: - Zikirmatik (Dhikr) Yazma/Okuma
-    func fetchActiveDhikr() -> Dhikr? {
+    func fetchActiveDhikr() async -> Dhikr? {
         let query = "SELECT id, title, count, target FROM user_dhikrs LIMIT 1"
         
         return DatabaseHelper.queryRow(db, sql: query) { statement in
@@ -18,7 +18,7 @@ extension AppDatabaseManager {
         }
     }
     
-    func saveActiveDhikr(_ dhikr: Dhikr) {
+    func saveActiveDhikr(_ dhikr: Dhikr) async {
         let query = "INSERT OR REPLACE INTO user_dhikrs (id, title, count, target) VALUES (?, ?, ?, ?)"
         
         _ = DatabaseHelper.execute(db, sql: query) { statement in
@@ -30,6 +30,19 @@ extension AppDatabaseManager {
             } else {
                 sqlite3_bind_null(statement, 4)
             }
+        }
+    }
+    
+    /// Fetches the predefined dhikr templates (Subhanallah, etc.) from the 'dhikr_templates' table.
+    func fetchDhikrTemplates() async -> [DhikrTemplate] {
+        let sql = "SELECT id, title_key, target FROM dhikr_templates ORDER BY id ASC"
+        
+        return DatabaseHelper.query(db, sql: sql) { statement in
+            DhikrTemplate(
+                id: DatabaseHelper.int(for: statement, column: 0),
+                titleKey: DatabaseHelper.string(for: statement, column: 1) ?? "",
+                target: DatabaseHelper.int(for: statement, column: 2)
+            )
         }
     }
 }

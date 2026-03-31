@@ -44,6 +44,9 @@ protocol DatabaseProvider: Sendable {
     
     /// Retrieves the total number of hadiths in the database.
     func fetchHadithCount() async -> Int
+    
+    /// Retrieves the predefined dhikr templates from the 'dhikr_templates' table.
+    func fetchDhikrTemplates() async -> [DhikrTemplate]
 }
 
 /// A protocol defining the networking operations for retrieving prayer times and location data.

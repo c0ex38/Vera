@@ -22,6 +22,8 @@ class DhikrViewModel: ObservableObject {
         }
     }
     
+    @Published var templates: [DhikrTemplate] = []
+    
     private var dhikrId: UUID = UUID()
     private let database: DatabaseProvider
     private let tickHaptic = UISelectionFeedbackGenerator()
@@ -38,6 +40,9 @@ class DhikrViewModel: ObservableObject {
     
     private func loadInitialData() {
         Task {
+            // Load templates from DB
+            self.templates = await database.fetchDhikrTemplates()
+            
             if let savedDhikr = await database.fetchActiveDhikr() {
                 self.dhikrId = savedDhikr.id
                 self.title = savedDhikr.title

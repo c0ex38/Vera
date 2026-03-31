@@ -73,7 +73,7 @@ struct HomeView: View {
                                         Rectangle()
                                             .fill(Color.themePrimary.opacity(0.3))
                                             .frame(width: 40, height: 4)
-                                            .cornerRadius(2)
+                                            .clipShape(.rect(cornerRadius: 2))
                                     }
                                     Spacer()
                                 }
@@ -84,31 +84,31 @@ struct HomeView: View {
                                 
                                 // Ad Section
                                 #if canImport(GoogleMobileAds)
-                                VStack(alignment: .leading, spacing: 8) {
-                                    HStack {
-                                        Text(L10n.Home.sponsored)
-                                            .font(.system(size: 11, weight: .bold, design: .rounded))
-                                            .foregroundStyle(.themeTextSecondary.opacity(0.7))
-                                            .kerning(1.0)
-                                        Spacer()
-                                    }
-                                    .padding(.horizontal, 24)
-                                    
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                            .fill(Color.themeSurface.opacity(0.4))
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        HStack {
+                                            Text(L10n.Home.sponsored)
+                                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                                                .foregroundStyle(.themeTextSecondary.opacity(0.7))
+                                                .kerning(1.0)
+                                            Spacer()
+                                        }
+                                        .padding(.horizontal, 24)
                                         
-                                        AdBannerView(adUnitID: AppEnvironment.shared.admobBannerID)
-                                            .padding(.vertical, 8)
-                                            .frame(minHeight: 60)
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                                .fill(Color.themeSurface.opacity(0.4))
+                                            
+                                            AdBannerView(adUnitID: AppEnvironment.shared.admobBannerID, useSharedPreload: false)
+                                                .padding(.vertical, 8)
+                                                .frame(minHeight: 60)
+                                        }
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                                .stroke(Color.themePrimary.opacity(0.05), lineWidth: 1)
+                                        )
                                     }
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                            .stroke(Color.themePrimary.opacity(0.05), lineWidth: 1)
-                                    )
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.top, 8)
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, 8)
                                 #endif
                             }
                             

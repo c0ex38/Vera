@@ -230,6 +230,30 @@
 			<key>SKAdNetworkIdentifier</key>
 			<string>krvm5ba6qw.skadnetwork</string>
 		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>24zw6aqkkh.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>3l6bd9hu43.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>578prgx85x.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>24zw6aqkkh.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>3l6bd9hu43.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>4468km3ulz.skadnetwork</string>
+		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

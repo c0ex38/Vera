@@ -26,10 +26,20 @@ struct AppEnvironment: EnvironmentProvider {
         }
         
         self.admobAppID = infoDictionary["GADApplicationIdentifier"] as? String ?? ""
-        self.admobBannerID = infoDictionary["AdMobBannerID"] as? String ?? ""
-        self.admobAppOpenID = infoDictionary["AdMobAppOpenID"] as? String ?? "ca-app-pub-3565786409265176/2231812288"
-        self.admobInterstitialID = infoDictionary["AdMobInterstitialID"] as? String ?? ""
         self.apiBaseURL = infoDictionary["ApiBaseUrl"] as? String ?? ""
+        
+        #if DEBUG
+        // Official Google AdMob Test IDs (iOS)
+        // These IDs are safe for use during development and ensure 100% fill rate in simulators.
+        debugPrint("AdMob: Running in DEBUG mode. Overriding real IDs with Test IDs.")
+        self.admobAppOpenID = "ca-app-pub-3940256099942544/9257395915"
+        self.admobBannerID = "ca-app-pub-3940256099942544/2934735716"
+        self.admobInterstitialID = "ca-app-pub-3940256099942544/4411468910"
+        #else
+        self.admobBannerID = infoDictionary["AdMobBannerID"] as? String ?? ""
+        self.admobAppOpenID = infoDictionary["AdMobAppOpenID"] as? String ?? ""
+        self.admobInterstitialID = infoDictionary["AdMobInterstitialID"] as? String ?? ""
+        #endif
         
         #if DEBUG
         if self.admobBannerID.isEmpty || self.apiBaseURL.isEmpty {

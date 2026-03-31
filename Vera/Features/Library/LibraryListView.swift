@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LibraryListView: View {
     @StateObject private var viewModel = LibraryViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     
     // Grid Setup
     private let columns = [
@@ -30,14 +30,14 @@ struct LibraryListView: View {
                                 .frame(maxWidth: .infinity, minHeight: 200)
                         } else if viewModel.categories.isEmpty {
                             Text(L10n.Common.error)
-                                .foregroundColor(.themeTextSecondary)
+                                .foregroundStyle(.themeTextSecondary)
                                 .frame(maxWidth: .infinity, minHeight: 200)
                         } else {
                             // Categories Grid
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(viewModel.filteredCategories) { category in
-                                    NavigationLink(destination: categoryDetailList(category)) {
-                                        categoryCard(category)
+                                    NavigationLink(destination: LibraryCategoryDetailView(category: category)) {
+                                        LibraryCategoryCard(category: category)
                                     }
                                 }
                             }
@@ -60,7 +60,7 @@ struct LibraryListView: View {
                 )
             }
         }
-        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     // MARK: - Components
@@ -68,11 +68,11 @@ struct LibraryListView: View {
     private var header: some View {
         HStack {
             Button(action: {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(.themeText)
+                    .foregroundStyle(.themeText)
                     .frame(width: 40, height: 40)
                     .background(Color.themeSurface)
                     .clipShape(Circle())
@@ -83,7 +83,7 @@ struct LibraryListView: View {
             
             Text("Kütüphane")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(.themeText)
+                .foregroundStyle(.themeText)
             
             Spacer()
             
@@ -99,7 +99,7 @@ struct LibraryListView: View {
     private var searchBar: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.themeTextSecondary)
+                .foregroundStyle(.themeTextSecondary)
             
             TextField("Dua, sure veya bilgi ara...", text: $viewModel.searchText)
                 .font(.system(size: 15))
@@ -107,19 +107,25 @@ struct LibraryListView: View {
             if !viewModel.searchText.isEmpty {
                 Button(action: { viewModel.searchText = "" }) {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.themeTextSecondary.opacity(0.6))
+                        .foregroundStyle(.themeTextSecondary.opacity(0.6))
                 }
             }
         }
         .padding(12)
         .background(Color.themeSurface)
-        .cornerRadius(12)
+        .clipShape(.rect(cornerRadius: 12))
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
         .shadow(color: .black.opacity(0.03), radius: 8, y: 4)
     }
+}
+
+// MARK: - Subviews
+
+struct LibraryCategoryCard: View {
+    let category: LibraryCategory
     
-    private func categoryCard(_ category: LibraryCategory) -> some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             ZStack {
                 Circle()
@@ -128,18 +134,18 @@ struct LibraryListView: View {
                 
                 Image(systemName: category.icon ?? "book.fill")
                     .font(.system(size: 22))
-                    .foregroundColor(Color(hex: category.color ?? "#007AFF"))
+                    .foregroundStyle(Color(hex: category.color ?? "#007AFF"))
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(category.name)
                     .font(.system(size: 16, weight: .bold, design: .rounded))
-                    .foregroundColor(.themeText)
+                    .foregroundStyle(.themeText)
                     .lineLimit(2)
                 
                 Text("\(category.items.count) İçerik")
                     .font(.system(size: 12))
-                    .foregroundColor(.themeTextSecondary)
+                    .foregroundStyle(.themeTextSecondary)
             }
         }
         .padding(16)
@@ -150,29 +156,37 @@ struct LibraryListView: View {
                 .shadow(color: .black.opacity(0.05), radius: 10, y: 5)
         )
     }
+}
+
+struct LibraryCategoryDetailView: View {
+    let category: LibraryCategory
+    @Environment(\.dismiss) private var dismiss
     
-    private func categoryDetailList(_ category: LibraryCategory) -> some View {
+    var body: some View {
         ZStack {
             Color.themeBackground.ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // Mini Header
+                // Custom Mini Header
                 HStack {
-                    Button(action: { /* Automatic back button works */ }) {
-                        // We use the default back button or define a custom one in this child view
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(.themeText)
                     }
                     Text(category.name)
-                        .font(.headline)
-                        .foregroundColor(.themeText)
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundStyle(.themeText)
                     Spacer()
                 }
                 .padding()
+                .background(Color.themeSurface)
                 
                 ScrollView {
                     VStack(spacing: 12) {
                         ForEach(category.items) { item in
                             NavigationLink(destination: LibraryDetailView(item: item)) {
-                                itemRow(item)
+                                LibraryItemRow(item: item)
                             }
                         }
                     }
@@ -180,20 +194,24 @@ struct LibraryListView: View {
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .navigationBar)
     }
+}
+
+struct LibraryItemRow: View {
+    let item: LibraryItem
     
-    private func itemRow(_ item: LibraryItem) -> some View {
+    var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.title)
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.themeText)
+                    .foregroundStyle(.themeText)
                 
                 if let meaning = item.meaning {
                     Text(meaning)
                         .font(.system(size: 13))
-                        .foregroundColor(.themeTextSecondary)
+                        .foregroundStyle(.themeTextSecondary)
                         .lineLimit(1)
                 }
             }
@@ -202,11 +220,11 @@ struct LibraryListView: View {
             
             Image(systemName: "chevron.right")
                 .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.themeTextSecondary.opacity(0.4))
+                .foregroundStyle(.themeTextSecondary.opacity(0.4))
         }
         .padding(16)
         .background(Color.themeSurface)
-        .cornerRadius(16)
+        .clipShape(.rect(cornerRadius: 16))
         .shadow(color: .black.opacity(0.03), radius: 8, y: 4)
     }
 }
