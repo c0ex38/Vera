@@ -35,6 +35,7 @@ struct DiscoverySection: View {
                         DiscoveryCard(suggestion: suggestion)
                     }
                 }
+                .padding(.horizontal, 20)
             }
         }
         .onAppear {

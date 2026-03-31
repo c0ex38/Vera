@@ -47,19 +47,10 @@ struct HadithCard: View {
                         .foregroundColor(.themePrimary.opacity(0.4))
                 }
             }
-            .padding(24)
+            .padding(20)
+            .veraGlassCard(cornerRadius: 24)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.themeSurface.opacity(0.4))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color.themePrimary.opacity(0.05), lineWidth: 1)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .padding(.horizontal, 20)
         .shadow(color: .black.opacity(0.02), radius: 10, y: 5)
-        .padding(.horizontal, 20)
     }
 }

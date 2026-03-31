@@ -151,7 +151,9 @@ struct DhikrView: View {
                             .font(.system(size: 40))
                             .foregroundColor(.white.opacity(0.7))
                             .offset(y: 10)
+                            .rippleEffect(trigger: viewModel.count > 0, color: .white)
                     }
+                    .breathingGlow(color: .themePrimary, isActive: viewModel.count > 0)
                 }
                 .buttonStyle(DhikrButtonStyle())
                 

@@ -86,6 +86,40 @@ struct Theme {
             .system(size: size, weight: .bold, design: .rounded)
         }
     }
+    
+    // MARK: - Dynamic Prayer Themes
+    enum PrayerTheme {
+        case imsak, sunrise, dhuhr, asr, maghrib, isha
+        
+        var gradientColors: [Color] {
+            switch self {
+            case .imsak: // Tan Vakti (Dawn)
+                return [Color(hex: "0F172A"), Color(hex: "1E293B"), Color(hex: "334155")]
+            case .sunrise: // Altın Saat (Sunrise)
+                return [Color(hex: "1E293B"), Color(hex: "B45309"), Color(hex: "D97706")]
+            case .dhuhr: // Gün Ortası (Midday)
+                return [Color(hex: "0D9488"), Color(hex: "0F766E"), Color(hex: "115E59")]
+            case .asr: // İkindi (Afternoon)
+                return [Color(hex: "0F766E"), Color(hex: "92400E"), Color(hex: "D97706")]
+            case .maghrib: // Akşam (Sunset)
+                return [Color(hex: "1E293B"), Color(hex: "7C2D12"), Color(hex: "431407")]
+            case .isha: // Gece (Night)
+                return [Color(hex: "020617"), Color(hex: "0F172A"), Color(hex: "1E293B")]
+            }
+        }
+        
+        static func from(vakit: String) -> PrayerTheme {
+            switch vakit.lowercased() {
+            case "imsak": return .imsak
+            case "güneş", "sunrise": return .sunrise
+            case "öğle", "dhuhr": return .dhuhr
+            case "ikindi", "asr": return .asr
+            case "akşam", "maghrib": return .maghrib
+            case "yatsı", "isha": return .isha
+            default: return .dhuhr
+            }
+        }
+    }
 }
 
 // MARK: - Color & UIColor Extensions for Easy Hex Support
@@ -146,4 +180,79 @@ extension ShapeStyle where Self == Color {
     static var themeTextSecondary: Color { .themeTextSecondary }
     static var themeTextDescription: Color { .themeTextDescription }
     static var emerald: Color { .emerald }
+}
+
+// MARK: - Premium UI Modifiers (Refinements 3 & 4)
+extension View {
+    func veraGlassCard(cornerRadius: CGFloat = 24) -> some View {
+        self.modifier(VeraGlassCardModifier(cornerRadius: cornerRadius))
+    }
+    
+    func breathingGlow(color: Color, isActive: Bool = true) -> some View {
+        self.modifier(BreathingGlowModifier(color: color, isActive: isActive))
+    }
+    
+    func rippleEffect(trigger: Bool, color: Color = .themePrimary) -> some View {
+        self.modifier(RippleModifier(trigger: trigger, color: color))
+    }
+}
+
+private struct VeraGlassCardModifier: ViewModifier {
+    var cornerRadius: CGFloat
+    
+    func body(content: Content) -> some View {
+        content
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .fill(Color.themeSurface.opacity(0.4))
+                    
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .stroke(
+                            LinearGradient(
+                                colors: [.white.opacity(0.15), .white.opacity(0.05)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 0.8
+                        )
+                }
+            )
+            .shadow(color: .black.opacity(0.05), radius: 15, y: 10)
+    }
+}
+
+private struct BreathingGlowModifier: ViewModifier {
+    @State private var isAnimating = false
+    var color: Color
+    var isActive: Bool
+    
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: isActive ? color.opacity(isAnimating ? 0.4 : 0.1) : .clear, radius: isAnimating ? 12 : 6)
+            .scaleEffect(isActive && isAnimating ? 1.02 : 1.0)
+            .onAppear {
+                if isActive {
+                    withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
+                        isAnimating = true
+                    }
+                }
+            }
+    }
+}
+
+private struct RippleModifier: ViewModifier {
+    var trigger: Bool
+    var color: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                Circle()
+                    .stroke(color, lineWidth: 2)
+                    .scaleEffect(trigger ? 2.0 : 0.5)
+                    .opacity(trigger ? 0 : 0.5)
+                    .animation(.easeOut(duration: 0.6), value: trigger)
+            )
+    }
 }

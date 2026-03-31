@@ -79,3 +79,42 @@ extension VeraCustomHeader where RightContent == AnyView {
         }
     }
 }
+
+// MARK: - Dynamic Prayer Background
+struct VeraBackgroundView: View {
+    let prayerTheme: Theme.PrayerTheme
+    
+    var body: some View {
+        ZStack {
+            // Global Base
+            Color.themeBackground.ignoresSafeArea()
+            
+            // Dynamic Gradient (Refinement 1)
+            LinearGradient(
+                colors: prayerTheme.gradientColors,
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .opacity(0.15) // Subtle enough not to distract
+            .ignoresSafeArea()
+            .animation(.easeInOut(duration: 2.0), value: prayerTheme)
+            
+            // Ambient Orbs for Depth
+            ZStack {
+                Circle()
+                    .fill(prayerTheme.gradientColors.first?.opacity(0.2) ?? .clear)
+                    .frame(width: 400, height: 400)
+                    .blur(radius: 80)
+                    .offset(x: 150, y: -200)
+                
+                Circle()
+                    .fill(prayerTheme.gradientColors.last?.opacity(0.12) ?? .clear)
+                    .frame(width: 300, height: 300)
+                    .blur(radius: 60)
+                    .offset(x: -100, y: 300)
+            }
+            .ignoresSafeArea()
+            .animation(.spring(response: 3.0, dampingFraction: 0.8), value: prayerTheme)
+        }
+    }
+}

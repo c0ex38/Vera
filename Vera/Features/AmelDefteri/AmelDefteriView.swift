@@ -114,11 +114,7 @@ struct AmelDefteriView: View {
         }
         .padding(24)
         .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 32, style: .continuous)
-                .fill(Color.themeSurface)
-                .shadow(color: .black.opacity(0.05), radius: 15, y: 10)
-        )
+        .veraGlassCard(cornerRadius: 32)
     }
     
     private var dateSwitcher: some View {
@@ -233,11 +229,7 @@ struct TaskRow: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 24, style: .continuous)
-                    .fill(Color.themeSurface)
-                    .shadow(color: .black.opacity(isCompleted ? 0.05 : 0.02), radius: 8, y: 4)
-            )
+            .veraGlassCard(cornerRadius: 24)
             .scaleEffect(isCompleted ? 0.98 : 1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isCompleted)
         }

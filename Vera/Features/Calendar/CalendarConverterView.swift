@@ -58,7 +58,9 @@ struct CalendarConverterView: View {
                 .padding(20)
             }
         }
-        .background(Color.themeBackground.ignoresSafeArea())
+        .background(
+            VeraBackgroundView(prayerTheme: .dhuhr) // Bu görünümde default dhuhr kullanabiliriz veya Home'dan inject edilebilir
+        )
         .navigationBarHidden(true)
     }
     
@@ -106,15 +108,7 @@ struct CalendarConverterView: View {
                 .frame(maxHeight: 180)
         }
         .padding(20)
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Color.themeSurface.opacity(0.4))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(color.opacity(0.1), lineWidth: 1)
-                )
-        )
-        .shadow(color: .black.opacity(0.03), radius: 10, y: 5)
+        .veraGlassCard(cornerRadius: 24)
     }
 }
 

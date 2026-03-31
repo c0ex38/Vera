@@ -13,71 +13,37 @@ struct DiscoveryCard: View {
             ZStack {
                 Circle()
                     .fill(suggestion.color.opacity(0.15))
-                    .frame(width: 250, height: 250)
-                    .blur(radius: 70)
-                    .offset(x: animateGlow ? 100 : 60, y: animateGlow ? -60 : -20)
+                    .frame(width: 180, height: 180)
+                    .blur(radius: 60)
+                    .offset(x: animateGlow ? 80 : 40, y: animateGlow ? -40 : -10)
                 
                 Circle()
                     .fill(suggestion.color.opacity(0.1))
-                    .frame(width: 200, height: 200)
-                    .blur(radius: 60)
-                    .offset(x: animateGlow ? -80 : -40, y: animateGlow ? 40 : 80)
+                    .frame(width: 150, height: 150)
+                    .blur(radius: 50)
+                    .offset(x: animateGlow ? -60 : -30, y: animateGlow ? 30 : 60)
             }
             .animation(.easeInOut(duration: 4).repeatForever(autoreverses: true), value: animateGlow)
             .onAppear { animateGlow = true }
             
-            // Glassmorphic Card
-            RoundedRectangle(cornerRadius: 32, style: .continuous)
-                .fill(.ultraThinMaterial)
-                .shadow(color: .black.opacity(0.04), radius: 20, x: 0, y: 10)
-                .overlay(
-                    ZStack {
-                        // Light Reflection Stroke (Top-Left)
-                        RoundedRectangle(cornerRadius: 32, style: .continuous)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [.white.opacity(0.5), .clear, .clear],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1.5
-                            )
-                        
-                        // Suggestion Color Stroke
-                        RoundedRectangle(cornerRadius: 32, style: .continuous)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        suggestion.color.opacity(0.4),
-                                        .clear,
-                                        suggestion.color.opacity(0.1)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1
-                            )
-                    }
-                )
-            
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 16) {
                     ZStack {
                         Circle()
                             .fill(suggestion.color.opacity(0.15))
-                            .frame(width: 52, height: 52)
+                            .frame(width: 44, height: 44)
                         
                         Image(systemName: suggestion.icon)
-                            .font(.system(size: 24, weight: .semibold))
+                            .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(suggestion.color)
                     }
                     .shadow(color: suggestion.color.opacity(0.2), radius: 8, x: 0, y: 4)
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text(suggestion.title)
-                            .font(.system(size: 14, weight: .black, design: .rounded))
+                            .font(.system(size: 13, weight: .black, design: .rounded))
                             .foregroundColor(suggestion.color)
-                            .kerning(1.5)
+                            .kerning(1.2)
                             .textCase(.uppercase)
                         
                         Rectangle()
@@ -90,9 +56,9 @@ struct DiscoveryCard: View {
                 }
                 
                 Text(suggestion.content)
-                    .font(.system(size: 18, weight: .medium, design: .serif))
+                    .font(.system(size: 16, weight: .medium, design: .serif))
                     .foregroundColor(.themeText)
-                    .lineSpacing(6)
+                    .lineSpacing(4)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                 
@@ -108,15 +74,15 @@ struct DiscoveryCard: View {
                         }
                     }
                 }) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 8) {
                         Text(suggestion.actionTitle)
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
                         Image(systemName: "arrow.right.circle.fill")
-                            .font(.system(size: 22))
+                            .font(.system(size: 18))
                     }
                     .foregroundColor(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 14)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
                     .background(
                         ZStack {
                             Capsule()
@@ -139,7 +105,8 @@ struct DiscoveryCard: View {
                     destinationFor(suggestion.type)
                 }
             }
-            .padding(28)
+            .padding(20)
+            .veraGlassCard(cornerRadius: 24)
         }
         .scaleEffect(isPressing ? 0.98 : 1.0)
         .animation(.spring(response: 0.4, dampingFraction: 0.7), value: isPressing)

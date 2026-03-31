@@ -37,21 +37,9 @@ struct HomeView: View {
             ZStack {
                 Color.themeBackground.ignoresSafeArea()
                 
-                // Zarif Statik Arkaplan (Ambient Glow)
-                ZStack {
-                    Circle()
-                        .fill(Color.themePrimary.opacity(0.12))
-                        .frame(width: 400, height: 400)
-                        .blur(radius: 80)
-                        .offset(x: 150, y: -200)
-                    
-                    Circle()
-                        .fill(Color.orange.opacity(0.08))
-                        .frame(width: 300, height: 300)
-                        .blur(radius: 60)
-                        .offset(x: -100, y: 300)
-                }
-                .ignoresSafeArea()
+                // Dinamik Arkaplan (Refinement 1)
+                VeraBackgroundView(prayerTheme: Theme.PrayerTheme.from(vakit: countdownManager.currentPrayer?.rawValue ?? "öğle"))
+                    .ignoresSafeArea()
                 
                 if viewModel.state == .success {
                     ScrollView(showsIndicators: false) {
