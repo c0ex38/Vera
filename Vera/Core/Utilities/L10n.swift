@@ -81,7 +81,11 @@ enum L10n {
         static let support = NSLocalizedString("settings_destek", comment: "")
         static let contact = NSLocalizedString("settings_ulasin", comment: "")
         static let faq = NSLocalizedString("settings_yardim", comment: "")
-        static let about = NSLocalizedString("settings_hakkimizda", comment: "")
+        static let about = NSLocalizedString("settings_about", comment: "")
+        
+        static let dataManagement = NSLocalizedString("settings_data_management", comment: "")
+        static let resetData = NSLocalizedString("settings_reset_data", comment: "")
+        static let resetDataDesc = NSLocalizedString("settings_reset_data_desc", comment: "")
     }
     
     enum Location {
@@ -287,7 +291,34 @@ enum L10n {
         static let settings = NSLocalizedString("menu_settings", comment: "")
         static let settingsSub = NSLocalizedString("menu_settings_sub", comment: "")
         
+        static let amelDefteri = NSLocalizedString("menu_amel_defteri", comment: "")
+        static let amelDefteriSub = NSLocalizedString("menu_amel_defteri_sub", comment: "")
+        
+        static let calendarConverter = NSLocalizedString("menu_calendar_converter", comment: "")
+        static let calendarConverterSub = NSLocalizedString("menu_calendar_converter_sub", comment: "")
+        
         static let loadingImsakiye = NSLocalizedString("menu_loading_imsakiye", comment: "")
+    }
+    
+    enum AmelDefteri {
+        static let title = NSLocalizedString("amel_defteri_title", comment: "")
+        static let today = NSLocalizedString("amel_defteri_bugun", comment: "")
+        static let progress = NSLocalizedString("amel_defteri_gelisim", comment: "")
+        static let completed = NSLocalizedString("amel_defteri_tamamlandi", comment: "")
+        static let pending = NSLocalizedString("amel_defteri_bekliyor", comment: "")
+        
+        static let msgSuccess = NSLocalizedString("amel_defteri_msg_success", comment: "")
+        static let msgGreat = NSLocalizedString("amel_defteri_msg_great", comment: "")
+        static let msgStarted = NSLocalizedString("amel_defteri_msg_started", comment: "")
+        static let msgEmpty = NSLocalizedString("amel_defteri_msg_empty", comment: "")
+    }
+
+    enum CalendarConverter {
+        static let title = NSLocalizedString("calendar_converter_title", comment: "")
+        static let gregorian = NSLocalizedString("calendar_converter_gregorian", comment: "")
+        static let hijri = NSLocalizedString("calendar_converter_hijri", comment: "")
+        static let selectDate = NSLocalizedString("calendar_converter_select_date", comment: "")
+        static let copyResult = NSLocalizedString("calendar_converter_copy", comment: "")
     }
     
     enum Hadith {

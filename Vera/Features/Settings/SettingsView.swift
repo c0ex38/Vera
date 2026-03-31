@@ -67,9 +67,26 @@ struct SettingsView: View {
                     }
                 }
                 .listRowBackground(Color.themeSurface)
+                
+                Section(header: Text(L10n.Settings.dataManagement).foregroundColor(.themePrimary)) {
+                    Button(role: .destructive) {
+                        viewModel.isShowingResetConfirmation = true
+                    } label: {
+                        Label(L10n.Settings.resetData, systemImage: "trash.fill")
+                    }
+                }
+                .listRowBackground(Color.themeSurface)
             }
             .scrollContentBackground(.hidden)
             .background(Color.themeBackground)
+            .alert(L10n.Settings.resetData, isPresented: $viewModel.isShowingResetConfirmation) {
+                Button(L10n.Common.cancel, role: .cancel) { }
+                Button(L10n.Settings.resetData, role: .destructive) {
+                    viewModel.resetAllData()
+                }
+            } message: {
+                Text(L10n.Settings.resetDataDesc)
+            }
         }
         .preferredColorScheme(viewModel.appTheme == 1 ? .light : (viewModel.appTheme == 2 ? .dark : nil))
         .navigationBarHidden(true)

@@ -109,9 +109,10 @@
 "settings_kuran" = "Kuran-ı Kerim";
 "settings_meal_yazar" = "Meal Yazar Seçimi";
 
-"settings_destek" = "Support";
+"settings_destek" = "Destek";
 "settings_ulasin" = "Bize Ulaşın";
 "settings_yardim" = "Yardım ve SSS";
+"settings_about" = "Hakkımızda";
 "settings_hakkimizda" = "Hakkımızda";
 
 // MARK: - Zakat Calculator
@@ -324,3 +325,30 @@
 "premium_active" = "Vera Pro Aktif";
 "premium_upgrade" = "Pro'ya Geç";
 "premium_logs" = "Sistem Günlüğü";
+ 
+// MARK: - Amel Defteri
+"menu_amel_defteri" = "Amel Defteri";
+"menu_amel_defteri_sub" = "İbadet Takibi";
+"amel_defteri_title" = "Amel Defteri";
+"amel_defteri_bugun" = "Bugün";
+"amel_defteri_gelisim" = "Gelişim";
+"amel_defteri_tamamlandi" = "Tamamlandı";
+"amel_defteri_bekliyor" = "Bekliyor";
+"amel_defteri_msg_success" = "Tebrikler! Bugünün hedeflerini tamamladın. ✨";
+"amel_defteri_msg_great" = "Harika gidiyorsun, hedeflerine yaklaştın! 🚀";
+"amel_defteri_msg_started" = "İlk adımlar atıldı, devamını getirebilirsin. 💪";
+"amel_defteri_msg_empty" = "Bugünün manevi hedeflerine hemen başlamaya ne dersin? 🌱";
+
+// MARK: - Data Management
+"settings_data_management" = "Veri Yönetimi";
+"settings_reset_data" = "Tüm Verileri Sıfırla";
+"settings_reset_data_desc" = "Zikir, ibadet takibi ve diğer tüm kişisel verileriniz kalıcı olarak silinecektir. Emin misiniz?";
+
+// MARK: - Calendar Converter
+"menu_calendar_converter" = "Takvim Dönüştürücü";
+"menu_calendar_converter_sub" = "Miladi & Hicri";
+"calendar_converter_title" = "Takvim Dönüştürücü";
+"calendar_converter_gregorian" = "Miladi Tarih";
+"calendar_converter_hijri" = "Hicri Tarih";
+"calendar_converter_select_date" = "Tarih Seçiniz";
+"calendar_converter_copy" = "Tarihi Kopyala";

@@ -23,6 +23,7 @@ class SettingsViewModel: ObservableObject {
     @Published var contactEmail: String = ""
     @Published var contactMessage: String = ""
     @Published var isShowingAlert: Bool = false
+    @Published var isShowingResetConfirmation: Bool = false
     
     @Published var availableAuthors: [QuranAuthor] = []
     
@@ -61,5 +62,16 @@ class SettingsViewModel: ObservableObject {
     
     func submitContactForm() {
         isShowingAlert = true
+    }
+    
+    func resetAllData() {
+        Task {
+            await AppDatabaseManager.shared.reset()
+            PreferenceManager.shared.resetAll()
+            
+            // After reset, we might want to refresh current state if needed
+            // For now, most features will reload on next view appear
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        }
     }
 }

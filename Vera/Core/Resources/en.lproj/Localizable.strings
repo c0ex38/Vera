@@ -113,6 +113,7 @@
 "settings_destek" = "Support";
 "settings_ulasin" = "Contact Us";
 "settings_yardim" = "Help & FAQ";
+"settings_about" = "About Us";
 "settings_hakkimizda" = "About Us";
 
 // MARK: - Zakat Calculator
@@ -307,3 +308,30 @@
 "premium_active" = "Vera Pro Active";
 "premium_upgrade" = "Upgrade to Pro";
 "premium_logs" = "System Logs";
+ 
+// MARK: - Deed Manager (Amel Defteri)
+"menu_amel_defteri" = "Deed Manager";
+"menu_amel_defteri_sub" = "Spiritual Tracker";
+"amel_defteri_title" = "Deed Manager";
+"amel_defteri_bugun" = "Today";
+"amel_defteri_gelisim" = "Progress";
+"amel_defteri_tamamlandi" = "Completed";
+"amel_defteri_bekliyor" = "Pending";
+"amel_defteri_msg_success" = "Congratulations! You've completed today's goals. ✨";
+"amel_defteri_msg_great" = "Doing great, you're close to your goals! 🚀";
+"amel_defteri_msg_started" = "First steps taken, keep going! 💪";
+"amel_defteri_msg_empty" = "Ready to start today's spiritual goals? 🌱";
+
+// MARK: - Data Management
+"settings_data_management" = "Data Management";
+"settings_reset_data" = "Reset All Data";
+"settings_reset_data_desc" = "All your Dhikr records, Spiritual tracking, and personal data will be permanently deleted. Are you sure?";
+
+// MARK: - Calendar Converter
+"menu_calendar_converter" = "Date Converter";
+"menu_calendar_converter_sub" = "Gregorian & Hijri";
+"calendar_converter_title" = "Date Converter";
+"calendar_converter_gregorian" = "Gregorian Date";
+"calendar_converter_hijri" = "Hijri Date";
+"calendar_converter_select_date" = "Select Date";
+"calendar_converter_copy" = "Copy Date";

@@ -130,6 +130,7 @@ extension Color {
     static var themeText: Color { Theme.text }
     static var themeTextSecondary: Color { Theme.textSecondary }
     static var themeTextDescription: Color { Theme.textDescription }
+    static var emerald: Color { Color(hex: "10B981") }
 }
 
 // MARK: - ShapeStyle Extension for Shorthand Support
@@ -144,4 +145,5 @@ extension ShapeStyle where Self == Color {
     static var themeText: Color { .themeText }
     static var themeTextSecondary: Color { .themeTextSecondary }
     static var themeTextDescription: Color { .themeTextDescription }
+    static var emerald: Color { .emerald }
 }

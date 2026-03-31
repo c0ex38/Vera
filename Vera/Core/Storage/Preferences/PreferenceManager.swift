@@ -158,4 +158,32 @@ final class PreferenceManager: ObservableObject {
         self.appLanguage = defaults.string(forKey: Keys.appLanguage) ?? "tr"
         self.hasCompletedOnboarding = defaults.bool(forKey: Keys.hasCompletedOnboarding)
     }
+    
+    /// Resets all preferences to their default values.
+    func resetAll() {
+        // Reset local properties (which will trigger didSet and update UserDefaults)
+        self.hasCompletedOnboarding = false
+        self.autoLocationEnabled = true
+        self.notificationsEnabled = true
+        self.adhanSoundEnabled = true
+        self.reminderEnabled = false
+        self.savedDistrictID = ""
+        self.savedLocationName = ""
+        self.savedLatitude = 0
+        self.savedLongitude = 0
+        self.appTheme = 0 // System
+        // We keep the language as is to avoid sudden UI language swap
+        
+        // Ensure all keys are physically removed for a clean slate
+        let allKeys = [
+            Keys.districtID, Keys.locationName, Keys.latitude, Keys.longitude,
+            Keys.autoLocationEnabled, Keys.hasCompletedOnboarding,
+            Keys.notificationsEnabled, Keys.reminderEnabled
+        ]
+        for key in allKeys {
+            defaults.removeObject(forKey: key)
+        }
+        
+        defaults.synchronize()
+    }
 }
